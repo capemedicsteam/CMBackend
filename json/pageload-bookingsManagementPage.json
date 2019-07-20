@@ -1,0 +1,13 @@
+{
+  {%for $booking in $bookings%}
+  "{{$booking.id}}" : {
+                        "name": "{{$booking.name}}",
+                        "number": "{{$booking.number}}",
+                        "email": "{{$booking.email}}",
+                        "date": "{{$booking.date}}",
+                        "time": "{{$booking.time}}",
+                        "type": "{{$booking.type}}",
+                        "status": {"type":"{{$booking.statusType}}", "colour":"{{$booking.statusColour}}", "text":"{{$booking.statusText}}"}
+  }{%if not loop.last%},{%endif%}
+  {%endfor%}
+}
