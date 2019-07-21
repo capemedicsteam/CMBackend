@@ -3,7 +3,7 @@
   {
     $server = "remotemysql.com";
     $username = "dDsScbv5Ai";
-    $password = "database@host2019"
+    $password = "pFCtiZ0AnC";
     $database = "dDsScbv5Ai";
     return new mysqli($server, $username, $password, $database);
   }
