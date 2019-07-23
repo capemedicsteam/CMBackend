@@ -1,5 +1,5 @@
-<?php 
- function openDBConnection()
+<?php
+  function openDBConnection()
   {
     $server = "remotemysql.com";
     $username = "dDsScbv5Ai";
