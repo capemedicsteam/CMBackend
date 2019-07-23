@@ -1,0 +1,29 @@
+{
+  "job" : {
+        "id":"{{$id}}",
+        "booker_name":"{{$bookerName}}",
+        "number":"{{$number}}",
+	"company":"{{$company}}",
+        "email":"{{$email}}",
+	
+        "qualification":"{{$qualification}}",
+        "licence_expiry_date": {"colour":"{{$licenceExpiryDateColour}}", "text":"{{$licenceExpiryDateText}}"}
+      },
+  "shift" : {
+	{%for $shift in $shifts%}
+	"{{$shift.id}}": {
+          "date":"{{$shift.date}}",
+          "location": {"address":"{{$shift.locationAddress}}", "text":"$shift.locationText"},
+          "time_in":"{{$shift.timeIn}}",
+          "time_out":"{{$shift.timeOut}}",
+          "length":"{{$shift.length}}"
+        }{%if not loop.last%},{%endif%}
+	{%endfor%}}	
+	},
+  "salary":"{{$salary}}",
+  "documents":{
+	{%for $document in $documents%}
+	"{{$document.name}}":"{{$document.link}}"{%if not loop.last%},{%endif%}
+	{%endfor%}
+}
+}
