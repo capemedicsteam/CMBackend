@@ -9,14 +9,15 @@
 		{
 			if($_SESSION['user']) == "admin")
 			{
-				$header = "Location: ".$_GET['target'];
+				$header = "Location: ".$_GET['target']."?";
 				for($_GET as $key)
 				{
 					if($_GET[$key] != "target" && $_GET[$key] != "request_type")
 					{
-						$header = $header."&".$key."=".$_GET[$key];
+						$header = $header.$key."=".$_GET[$key]."&";
 					}
 				}
+				$header = substr($header, -1);
 				header($header);
 				exit();
 			}
