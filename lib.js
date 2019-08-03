@@ -416,11 +416,39 @@ $("input[type!='checkbox']").focus(function(){
     label.find('span').remove();
 });
 
+//function to check if any items are empty
+function checkEmpty(input){
+    if(input.val()==""){
+        input.addClass("alert-danger");
+        input.attr("placeholder","");
+        return true;
+    }
+        return false;
+}
+
+function checkMatchingPassword(password, confirmPassword){
+    if(password.val() != confirmPassword.val()){
+        return "Passwords do not match <br>";
+    }else{
+        return "";
+    }
+}
+
+function checkPassword(password){
+    if(password.val().length < 8){
+        return "Please make sure your password is atleast 8 characters long <br>";
+    }else{
+        return checkMatchingPassword(password,$("#confirmPassword")); 
+    }
+}
+
+
 $(".book").click(function(e){
     e.preventDefault();
     var form=$(this).parents("form");
-    alert(form.attr("id"));
-    validateForm(form.attr("id"));
+    if(validateForm(form.attr("id"))){
+        form.submit();   
+    }
     
 });
 
@@ -428,20 +456,37 @@ $(".book").click(function(e){
 function validateForm(formId){
     
     var errorMessage="";
+    var empty = false;
     
-    var data=[];
-    $("#"+formId+" *").filter(":input").each(function(){
-        if($(this).val()!="" && $(this).val()!=1){
+    $("#"+formId+" input").each(function(){
+        
+        empty = checkEmpty($(this));
+        if(($(this).attr("type")=="password" && $(this).attr("id") != "confirmPassword") && empty == false){
             
-            item ={};
-            item [$(this).attr('name')]=$(this).val();
-            
-            
-            data.push(item);
+            errorMessage += checkPassword($("#password"));
         }
+        
     });
-    console.log(data);
+    if(empty==true){
+        errorMessage+="Please ensure all fields are filed in <br>";
+    }
+    
+    if(errorMessage==""){
+        return true;
+    }else{
+        $("#errorBox").html(errorMessage);
+        return false;
+    }
+   
 }
+
+$("input").focus(function(){
+    
+    if($(this).hasClass("alert-danger")){
+        $(this).removeClass("alert-danger");
+    }
+    
+});
 
 //--------------------Date form functions---------------
 function getDaysInMonth(month,year){
