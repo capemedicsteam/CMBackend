@@ -1,0 +1,12 @@
+{
+  {%for $customer in $customers%}
+  "{{$customer.id}}" : {
+                        "name": "{{$customer.name}}",
+                        "number": "{{$customer.number}}",
+                        "email": "{{$customer.email}}",
+                        "company": "{{$customer.company}}",
+                        "bookings": "{{$customer.bookings}}",
+                        "last_booking": "{{$customer.lastBooking}}"
+  }{%if not loop.last%},{%endif%}
+  {%endfor%}
+}
