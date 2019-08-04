@@ -22,12 +22,7 @@ class Job
     protected $CREW_REQUIRED;
 
     //Constructors
-    public Job()
-    {
-
-    }
-
-    public Customer($booking_id, $type, $location_type, $location, $start_date, $end_date, $crew_required)
+    public function __construct($booking_id = null, $type, $location_type = null, $location = null, $start_date = null, $end_date = null, $crew_required = null)
     {
       $this->BOOKING_ID = $booking_id;
       $this->TYPE = $type;

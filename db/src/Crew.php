@@ -59,13 +59,8 @@ class Crew
     /** @Column(type="boolean") **/
     protected $EMPLOYED_ELSEWHERE;
 
-    //Constructors
-    public Crew()
-    {
-
-    }
-
-    public Booking($crew_name, $crew_surname, $date_of_birth, $contact_number, $id_passport_number, $address, $area_code, $next_of_kin_name, $next_of_kin_surname, $race, $gender, $marital_status, $disability, $file_paths, $bank_account_holder_name, $bank_account_holder_relationship, $bank_account_number, $bank_name, $bank_branch, $bank_branch_code, $bank_account_type, $tax_method, $tax_ref_number, $medical_aid_name, $medical_aid_dependants, $employed_elsewhere)
+    //Constructor
+    public function __construct($crew_name = null, $crew_surname = null, $date_of_birth = null, $contact_number = null, $id_passport_number = null, $address = null, $area_code = null, $next_of_kin_name = null, $next_of_kin_surname = null, $race = null, $gender = null, $marital_status = null, $disability = null, $file_paths = null, $bank_account_holder_name = null, $bank_account_holder_relationship = null, $bank_account_number = null, $bank_name = null, $bank_branch = null, $bank_branch_code = null, $bank_account_type = null, $tax_method = null, $tax_ref_number = null, $medical_aid_name = null, $medical_aid_dependants = null, $employed_elsewhere = null)
     {
       $this->CREW_NAME = $crew_name;
       $this->CREW_SURNAME = $crew_surname;

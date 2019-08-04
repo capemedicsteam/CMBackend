@@ -11,13 +11,8 @@ class Crew_Assignment
     /** @Column(type="integer") **/
     protected $JOB_ID;
 
-    //Constructors
-    public Crew_Assignment()
-    {
-
-    }
-
-    public Crew_Assignment($crew_id, $job_id)
+    //Constructor
+    public function __construct($crew_id = null, $job_id = null)
     {
       $this->CREW_ID = $crew_id;
       $this->JOB_ID = $job_id;

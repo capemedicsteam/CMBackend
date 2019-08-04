@@ -17,13 +17,8 @@ class Customer
     /** @Column(type="string") **/
     protected $EMAIL;
 
-    //Constructors
-    public Customer()
-    {
-
-    }
-
-    public Customer($name, $surname, $number, $company, $email)
+    //Constructor
+    public function __construct($name = null, $surname = null, $number = null, $company = null, $email = null)
     {
       $this->CUSTOMER_NAME = $name;
       $this->CUSTOMER_SURNAME = $surname;

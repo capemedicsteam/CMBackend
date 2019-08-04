@@ -13,13 +13,8 @@ class User
     /** @Column(type="integer") **/
     protected $USER_ID;
 
-    //Constructors
-    public User()
-    {
-
-    }
-
-    public User($email, $password, $type, $user_id)
+    //Constructor
+    public function __construct($email = null, $password = null, $type = null, $user_id = null)
     {
       $this->EMAIL = $email;
       $this->PASSWORD = password_hash($password, PASSWORD_DEFAULT);

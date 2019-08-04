@@ -15,13 +15,8 @@ class Booking
     /** @Column(type="string") **/
     protected $BOOKING_STATUS;
 
-    //Constructors
-    public Booking()
-    {
-      $this->BOOKING_STATUS = "u";
-    }
-
-    public Booking($customer_id, $proposed_date, $type)
+    //Constructor
+    public function __construct($customer_id = null, $proposed_date = null, $type = null)
     {
       $this->CUSTOMER_ID = $customer_id;
       $this->PROPOSED_DATE = $proposed_date;
