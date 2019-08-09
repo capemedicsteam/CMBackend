@@ -23,21 +23,17 @@ class Crew
     /** @Column(type="string") **/
     protected $NEXT_OF_KIN_NAME;
     /** @Column(type="string") **/
-    protected $NEXT_OF_KIN_SURNAME;
+    protected $NEXT_OF_KIN_CONTACT_NUMBER;
     /** @Column(type="string") **/
     protected $RACE;
     /** @Column(type="string") **/
     protected $GENDER;
-    /** @Column(type="string") **/
+    /** @Column(type="boolean") **/
     protected $MARITAL_STATUS;
-    /** @Column(type="string") **/
-    protected $DISABILITY;
-    /** @Column(type="string") **/
-    protected $FILE_PATHS;
+    /** @Column(type="boolean") **/
+    protected $DISABLED;
     /** @Column(type="string") **/
     protected $BANK_ACCOUNT_HOLDER_NAME;
-    /** @Column(type="string") **/
-    protected $BANK_ACCOUNT_HOLDER_RELATIONSHIP;
     /** @Column(type="string") **/
     protected $BANK_ACCOUNT_NUMBER;
     /** @Column(type="string") **/
@@ -47,20 +43,18 @@ class Crew
     /** @Column(type="string") **/
     protected $BANK_BRANCH_CODE;
     /** @Column(type="string") **/
-    protected $BANK_ACCOUNT_TYPE;
-    /** @Column(type="string") **/
-    protected $TAX_METHOD;
-    /** @Column(type="string") **/
     protected $TAX_REF_NUMBER;
     /** @Column(type="string") **/
-    protected $MEDICAL_AID_NAME;
+    protected $CERTIFICATION_TYPE;
     /** @Column(type="string") **/
-    protected $MEDICAL_AID_DEPENDANTS;
-    /** @Column(type="boolean") **/
-    protected $EMPLOYED_ELSEWHERE;
+    protected $CERTIFICATION_NUMBER;
+    /** @Column(type="string") **/
+    protected $ID_FILEPATH;
+    /** @Column(type="string") **/
+    protected $DOCUMENT_FILEPATHS;
 
     //Constructor
-    public function __construct($crew_name = null, $crew_surname = null, $date_of_birth = null, $contact_number = null, $id_passport_number = null, $address = null, $area_code = null, $next_of_kin_name = null, $next_of_kin_surname = null, $race = null, $gender = null, $marital_status = null, $disability = null, $file_paths = null, $bank_account_holder_name = null, $bank_account_holder_relationship = null, $bank_account_number = null, $bank_name = null, $bank_branch = null, $bank_branch_code = null, $bank_account_type = null, $tax_method = null, $tax_ref_number = null, $medical_aid_name = null, $medical_aid_dependants = null, $employed_elsewhere = null)
+    public function __construct($crew_name = null, $crew_surname = null, $date_of_birth = null, $contact_number = null, $id_passport_number = null, $address = null, $area_code = null, $next_of_kin_name = null, $next_of_kin_contact_number = null, $race = null, $gender = null, $marital_status = null, $disabled = null, $bank_account_holder_name = null, $bank_account_number = null, $bank_name = null, $bank_branch = null, $bank_branch_code = null, $tax_ref_number = null, $certification_type = null, $certification_number = null, $id_filepath = null, $document_filepaths = null)
     {
       $this->CREW_NAME = $crew_name;
       $this->CREW_SURNAME = $crew_surname;
@@ -70,24 +64,21 @@ class Crew
       $this->ADDRESS = $address;
       $this->AREA_CODE = $area_code;
       $this->NEXT_OF_KIN_NAME = $next_of_kin_name;
-      $this->NEXT_OF_KIN_SURNAME = $next_of_king_surname;
+      $this->NEXT_OF_KIN_CONTACT_NUMBER = $next_of_kin_contact_number;
       $this->RACE = $race;
       $this->GENDER = $gender;
       $this->MARITAL_STATUS = $marital_status;
       $this->DISABILITY = $disability;
-      $this->FILE_PATHS = $file_paths;
       $this->BANK_ACCOUNT_HOLDER_NAME = $bank_account_holder_name;
-      $this->BANK_ACCOUNT_HOLDER_RELATIONSHIP = $bank_account_holder_relationship;
       $this->BANK_ACCOUNT_NUMBER = $bank_account_number;
       $this->BANK_NAME = $bank_name;
       $this->BANK_BRANCH = $bank_branch;
       $this->BANK_BRANCH_CODE = $bank_branch_code;
-      $this->BANK_ACCOUNT_TYPE = $bank_account_type;
-      $this->TAX_METHOD = $tax_method;
       $this->TAX_REF_NUMBER = $tax_ref_number;
-      $this->MEDICAL_AID_NAME = $medical_aid_name;
-      $this->MEDICAL_AID_DEPENDANTS = $medical_aid_dependants;
-      $this->EMPLOYED_ELSEWHERE = $employed_elsewhere;
+      $this->CERTIFICATION_TYPE = $certification_type;
+      $this->CERTIFICATION_NUMBER = $certification_number;
+      $this->ID_FILEPATH = $id_filepath;
+      $this->DOCUMENT_FILEPATHS = $document_filepaths;
     }
 
     //Accessors
@@ -136,9 +127,9 @@ class Crew
         return $this->NEXT_OF_KIN_NAME;
     }
 
-    public function getNextOfKinSurname()
+    public function getNextOfKinContactNumber()
     {
-        return $this->NEXT_OF_KIN_SURNAME;
+        return $this->NEXT_OF_KIN_CONTACT_NUMBER;
     }
 
     public function getRace()
@@ -151,14 +142,14 @@ class Crew
         return $this->GENDER;
     }
 
-    public function getMaritalStatus()
+    public function isMarried()
     {
         return $this->MARITAL_STATUS;
     }
 
-    public function getDisability()
+    public function isDisabled()
     {
-        return $this->DISABILITY;
+        return $this->DISABLED;
     }
 
     public function getCrewName()
@@ -166,19 +157,9 @@ class Crew
         return $this->CREW_NAME;
     }
 
-    public function getFilePaths()
-    {
-        return JSON.parse($this->FILE_PATHS);
-    }
-
     public function getBankAccountHolderName()
     {
         return $this->BANK_ACCOUNT_HOLDER_NAME;
-    }
-
-    public function getBankAccountHolderRelationship()
-    {
-        return $this->BANK_ACCOUNT_HOLDER_RELATIONSHIP;
     }
 
     public function getBankAccountNumber()
@@ -201,34 +182,29 @@ class Crew
         return $this->BANK_BRANCH_CODE;
     }
 
-    public function getBankAccountType()
-    {
-        return $this->BANK_ACCOUNT_TYPE;
-    }
-
-    public function getTaxMethod()
-    {
-        return $this->TAX_METHOD;
-    }
-
     public function getTaxRefNumber()
     {
         return $this->TAX_REF_NUMBER;
     }
 
-    public function getMedicalAidName()
+    public function getCertificationType()
     {
-        return $this->MEDICAL_AID_NAME;
+        return $this->CERTIFICATION_TYPE;
     }
 
-    public function getMedicalAidDependants()
+    public function getCertificationNumber()
     {
-        return $this->MEDICAL_AID_DEPENDANTS;
+        return $this->CERTIFICATION_NUMBER;
     }
 
-    public function getEmployedElsewhere()
+    public function getIdFilePath()
     {
-        return $this->EMPLOYED_ELSEWHERE;
+        return $this->ID_FILEPATH;
+    }
+
+    public function getDocumentFilePaths()
+    {
+        return $this->DOCUMENT_FILEPATHS;
     }
 
     //Mutators
@@ -272,9 +248,9 @@ class Crew
         $this->NEXT_OF_KIN_NAME = $name;
     }
 
-    public function setNextOfKinSurname($surname)
+    public function setNextOfKinContactNumber($number)
     {
-        $this->NEXT_OF_KIN_SURNAME = $surname;
+        $this->NEXT_OF_KIN_CONTACT_NUMBER = $number;
     }
 
     public function setRace($race)
@@ -287,29 +263,19 @@ class Crew
         $this->GENDER = $gender;
     }
 
-    public function setMaritalStatus($status)
+    public function setMarried($status)
     {
         $this->MARITAL_STATUS = $status;
     }
 
-    public function setDisability($disability)
+    public function setDisabled($disability)
     {
-        $this->DISABILITY = $disability;
-    }
-
-    public function setFilePaths($object)
-    {
-        $this->FILE_PATHS = JSON.encode($object);
+        $this->DISABLED = $disability;
     }
 
     public function setBankAccountHolderName($name)
     {
         $this->BANK_ACCOUNT_HOLDER_NAME = $name;
-    }
-
-    public function setBankAccountHolderRelationship($relationship)
-    {
-        $this->BANK_ACCOUNT_HOLDER_RELATIONSHIP = $relationship;
     }
 
     public function setBankAccountNumber($number)
@@ -332,33 +298,28 @@ class Crew
         $this->BANK_BRANCH_CODE = $code;
     }
 
-    public function setBankAccountType($type)
-    {
-        $this->BANK_ACCOUNT_TYPE = $type;
-    }
-
-    public function setTaxMethod($method)
-    {
-        $this->TAX_METHOD = $method;
-    }
-
     public function setTaxRefNumber($number)
     {
         $this->TAX_REF_NUMBER = $number;
     }
 
-    public function setMedicalAidName($name)
+    public function setCertificationType($type)
     {
-        $this->MEDICAL_AID_NAME = $name;
+        $this->CERTIFICATION_TYPE = $type;
     }
 
-    public function setMedicalAidDependants($dependants)
+    public function setCertificationNumber($number)
     {
-        $this->MEDICAL_AID_DEPENDANTS = $dependants;
+        $this->CERTIFICATION_NUMBER = $number;
     }
 
-    public function setEmployedElsewhere($flag)
+    public function setIdFilepath($path)
     {
-        $this->EMPLOYED_ELSEWHERE = $flag;
+        $this->ID_FILEPATH = $path;
+    }
+
+    public function setDocumentFilepaths($filepaths)
+    {
+        $this->DOCUMENT_FILEPATHS = $filepaths;
     }
 }

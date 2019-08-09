@@ -12,16 +12,19 @@ class Booking
     protected $PROPOSED_DATE;
     /** @Column(type="string") **/
     protected $TYPE;
-    /** @Column(type="string") **/
-    protected $BOOKING_STATUS;
+    /** @Column(type="boolean") **/
+    protected $CONFIRMED;
+    /** @Column(type="boolean") **/
+    protected $ACCOUNT;
 
     //Constructor
-    public function __construct($customer_id = null, $proposed_date = null, $type = null)
+    public function __construct($customer_id = null, $proposed_date = null, $type = null, $account = true)
     {
       $this->CUSTOMER_ID = $customer_id;
       $this->PROPOSED_DATE = $proposed_date;
       $this->TYPE = $type;
-      $this->BOOKING_STATUS = "u";
+      $this->CONFIRMED = false;
+      $this->ACCOUNT = $account;
     }
 
     //Accessors
@@ -40,9 +43,19 @@ class Booking
         return $this->PROPOSED_DATE;
     }
 
-    public function getBookingStatus()
+    public function getType()
     {
-        return $this->BOOKING_STATUS;
+        return $this->TYPE;
+    }
+
+    public function isConfirmed()
+    {
+        return $this->CONFIRMED;
+    }
+
+    public function isAccount()
+    {
+        return $this->ACCOUNT;
     }
 
     //Mutators
@@ -56,8 +69,18 @@ class Booking
         $this->PROPOSED_DATE = $date;
     }
 
-    public function setBookingStatus($status)
+    public function setType($type)
     {
-        $this->BOOKING_STATUS = $status;
+        $this->TYPE = $type;
+    }
+
+    public function setConfirmed($flag)
+    {
+        $this->CONFIRMED = $flag;
+    }
+
+    public function setAccount($flag)
+    {
+        $this->ACCOUNT = $flag;
     }
 }
