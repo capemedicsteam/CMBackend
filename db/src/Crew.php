@@ -52,6 +52,11 @@ class Crew
     protected $ID_FILEPATH;
     /** @Column(type="string") **/
     protected $DOCUMENT_FILEPATHS;
+    /**
+     * @OneToMany(targetEntity="CrewAssignment", mappedBy="CREW")
+     * @var CrewAssignment[] An ArrayCollection of Bug objects.
+     **/
+    protected $CREW_ASSIGNMENTS = null;
 
     //Constructor
     public function __construct($crew_name = null, $crew_surname = null, $date_of_birth = null, $contact_number = null, $id_passport_number = null, $address = null, $area_code = null, $next_of_kin_name = null, $next_of_kin_contact_number = null, $race = null, $gender = null, $marital_status = null, $disabled = null, $bank_account_holder_name = null, $bank_account_number = null, $bank_name = null, $bank_branch = null, $bank_branch_code = null, $tax_ref_number = null, $certification_type = null, $certification_number = null, $id_filepath = null, $document_filepaths = null)
@@ -205,6 +210,16 @@ class Crew
     public function getDocumentFilePaths()
     {
         return $this->DOCUMENT_FILEPATHS;
+    }
+
+    public function getJobs()
+    {
+      private $jobs;
+      for($i = 0 ; $i < count(CREW_ASSIGNMENTS) ; $i++)
+      {
+        $jobs[] = CREW_ASSIGNMENTS[$i]->getJob();
+      }
+      return $jobs;
     }
 
     //Mutators

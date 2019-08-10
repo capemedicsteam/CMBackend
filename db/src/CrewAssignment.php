@@ -2,7 +2,7 @@
 /**
  * @Entity @Table(name="tbl_crew_assignments")
  **/
-class Crew_Assignment
+class CrewAssignment
 {
     /** @Id @Column(type="integer") @GeneratedValue **/
     protected $LINK_ID;
@@ -10,6 +10,10 @@ class Crew_Assignment
     protected $CREW_ID;
     /** @Column(type="integer") **/
     protected $JOB_ID;
+    /** @ManyToOne(targetEntity="Job", inversedBy="CREW_ASSIGNMENTS") **/
+    protected $JOB;
+    /** @ManyToOne(targetEntity="Crew", inversedBy="CREW_ASSIGNMENTS") **/
+    protected $CREW;
 
     //Constructor
     public function __construct($crew_id = null, $job_id = null)
@@ -26,12 +30,12 @@ class Crew_Assignment
 
     public function getCrew()
     {
-        return $entityManager->find("Crew", $this->CREW_ID);
+        return $this->CREW;
     }
 
     public function getJob()
     {
-        return $entityManager->find("Job", $this->JOB_ID);
+        return $this->JOB;
     }
 
     //Mutators

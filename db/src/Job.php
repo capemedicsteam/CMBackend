@@ -10,6 +10,14 @@ class Job
     protected $BOOKING_ID;
     /** @Column(type="integer") **/
     protected $CREW_REQUIRED;
+    /** @ManyToOne(targetEntity="Booking", inversedBy="JOB") **/
+    protected $BOOKING;
+    /**
+     * @OneToMany(targetEntity="CrewAssignment", mappedBy="JOB")
+     * @var CrewAssignment[] An ArrayCollection of Bug objects.
+     **/
+    protected $CREW_ASSIGNMENTS = null;
+
 
     //Constructors
     public function __construct($booking_id = null, $crew_required = null)
@@ -24,14 +32,24 @@ class Job
         return $this->JOB_ID;
     }
 
-    public function getBooking()
-    {
-        return $entityManager->find("Booking", $this->BOOKING_ID);
-    }
-
     public function getCrewRequired()
     {
         return $this->CREW_REQUIRED;
+    }
+
+    public function getBooking()
+    {
+        return $this->BOOKING;
+    }
+
+    public function getCrew()
+    {
+      private $crew;
+      for($i = 0 ; $i < count(CREW_ASSIGNMENTS) ; $i++)
+      {
+        $crew[] = CREW_ASSIGNMENTS[$i]->getCrew();
+      }
+      return $crew;
     }
 
     //Mutators
@@ -43,5 +61,16 @@ class Job
     public function setCrewRequired($crew)
     {
         $this->CREW_REQUIRED = $crew;
+    }
+
+    public function setBooking(Booking $booking)
+    {
+        $BOOKING->setJob($this);
+        $this->BOOKING = $booking;
+    }
+
+    public function addCrew(Crew $crew)
+    {
+      $this->CREW_ASSIGNMENTS[] = new CrewAssignment($crew->getCrewId(), $this);
     }
 }
