@@ -8,8 +8,8 @@ class User
     protected $EMAIL;
     /** @Column(type="string") **/
     protected $PASSWORD;
-    /** @Column(type="type") **/
-    protected $TYPE;
+    /** @Column(type="string") **/
+    protected $TYPE;  //Admin, Crew, Customer
     /** @Column(type="integer") **/
     protected $USER_ID;
 
