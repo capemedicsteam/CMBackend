@@ -1,4 +1,4 @@
 {
-  "back":"{{$backPageLink}}",
-  "document":"{{$documentLink}}"
+  "back":"{{backPageLink}}",
+  "document":"{{documentLink}}"
 }

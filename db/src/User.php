@@ -33,7 +33,7 @@ class User
         return $this->TYPE;
     }
 
-    public function getUserID())
+    public function getUserID()
     {
         return $this->USER_ID;
     }

@@ -1,11 +1,11 @@
 {
   {%for $employee in $employees%}
-  "{{$employee.id}}" : {
-                        "name": {"href":"../main.php?request_type=page&target=pageload-employeesInfoPage.php&id={{$employee.id}}", "text":"{{$employee.name}}"},
-                        "number": "{{$employee.number}}",
-                        "email": "{{$employee.email}}",
-                        "qualification": "{{$employee.qualification}}",
-                        "status": {"type":"{{$employee.statusType}}", "colour":"{{$employee.statusColour}}", "text":"{{$employee.statusText}}"}
+  "{{employee.id}}" : {
+                        "name": {"href":"../main.php?request_type=page&target=pageload-employeesInfoPage.php&id={{employee.id}}", "text":"{{employee.name}}"},
+                        "number": "{{employee.number}}",
+                        "email": "{{employee.email}}",
+                        "qualification": "{{employee.qualification}}",
+                        "status": {"type":"{{employee.statusType}}", "colour":"{{employee.statusColour}}", "text":"{{employee.statusText}}"}
   }{%if not loop.last%},{%endif%}
   {%endfor%}
 }

@@ -1,8 +1,8 @@
 <?php
 /**
- * @Entity @Table(name="tbl_bookings_tv")
+ * @Entity @Table(name="tbl_bookings_organ_transfer")
  **/
-class BookingTV
+class BookingOrganTransfer
 {
     /** @Id @Column(type="integer") **/
     protected $BOOKING_ID;

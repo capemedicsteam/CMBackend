@@ -5,8 +5,13 @@ use Doctrine\ORM\EntityManager;
 require_once "../vendor/autoload.php";
 //Load Entity Classes
 require_once "src/Booking.php";
-require_once "src/Crew_Assignment.php";
+require_once "src/BookingAirsideTransfer.php";
+require_once "src/BookingEvent.php";
+require_once "src/BookingIFHT.php";
+require_once "src/BookingOrganTransfer.php";
+require_once "src/BookingTV.php";
 require_once "src/Crew.php";
+require_once "src/CrewAssignment.php";
 require_once "src/Customer.php";
 require_once "src/Job.php";
 require_once "src/User.php";

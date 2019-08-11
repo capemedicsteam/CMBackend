@@ -157,11 +157,6 @@ class Crew
         return $this->DISABLED;
     }
 
-    public function getCrewName()
-    {
-        return $this->CREW_NAME;
-    }
-
     public function getBankAccountHolderName()
     {
         return $this->BANK_ACCOUNT_HOLDER_NAME;
@@ -214,7 +209,7 @@ class Crew
 
     public function getJobs()
     {
-      private $jobs;
+      $jobs;
       for($i = 0 ; $i < count(CREW_ASSIGNMENTS) ; $i++)
       {
         $jobs[] = CREW_ASSIGNMENTS[$i]->getJob();

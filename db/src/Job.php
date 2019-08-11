@@ -44,7 +44,7 @@ class Job
 
     public function getCrew()
     {
-      private $crew;
+      $crew;
       for($i = 0 ; $i < count(CREW_ASSIGNMENTS) ; $i++)
       {
         $crew[] = CREW_ASSIGNMENTS[$i]->getCrew();
@@ -53,11 +53,6 @@ class Job
     }
 
     //Mutators
-    public function setBooking($id)
-    {
-        $this->BOOKING_ID = $id;
-    }
-
     public function setCrewRequired($crew)
     {
         $this->CREW_REQUIRED = $crew;
