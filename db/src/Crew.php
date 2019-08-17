@@ -44,10 +44,18 @@ class Crew
     protected $BANK_BRANCH_CODE;
     /** @Column(type="string") **/
     protected $TAX_REF_NUMBER;
+    /** @Column(type="boolean") **/
+    protected $TYPE_FIRE;
+    /** @Column(type="boolean") **/
+    protected $TYPE_SAFETY;
+    /** @Column(type="boolean") **/
+    protected $TYPE_MEDICAL;
     /** @Column(type="string") **/
-    protected $CERTIFICATION_TYPE;
+    protected $FIRE_CERTIFICATE_NUMBER;
     /** @Column(type="string") **/
-    protected $CERTIFICATION_NUMBER;
+    protected $HPSCA_NUMBER;
+    /** @Column(type="string") **/
+    protected $SAIOSH_NUMBER;
     /** @Column(type="string") **/
     protected $ID_FILEPATH;
     /** @Column(type="string") **/
@@ -59,7 +67,7 @@ class Crew
     protected $CREW_ASSIGNMENTS = null;
 
     //Constructor
-    public function __construct($crew_name = null, $crew_surname = null, $date_of_birth = null, $contact_number = null, $id_passport_number = null, $address = null, $area_code = null, $next_of_kin_name = null, $next_of_kin_contact_number = null, $race = null, $gender = null, $marital_status = null, $disabled = null, $bank_account_holder_name = null, $bank_account_number = null, $bank_name = null, $bank_branch = null, $bank_branch_code = null, $tax_ref_number = null, $certification_type = null, $certification_number = null, $id_filepath = null, $document_filepaths = null)
+    public function __construct($crew_name = null, $crew_surname = null, $date_of_birth = null, $contact_number = null, $id_passport_number = null, $address = null, $area_code = null, $next_of_kin_name = null, $next_of_kin_contact_number = null, $race = null, $gender = null, $marital_status = null, $disabled = null, $bank_account_holder_name = null, $bank_account_number = null, $bank_name = null, $bank_branch = null, $bank_branch_code = null, $tax_ref_number = null, $type_fire = false, $type_safety = false, $type_medical = false, $fire_certificate_number = null, $hpsca_number = null, $saiosh_number = null, $id_filepath = null, $document_filepaths = null)
     {
       $this->CREW_NAME = $crew_name;
       $this->CREW_SURNAME = $crew_surname;
@@ -80,8 +88,12 @@ class Crew
       $this->BANK_BRANCH = $bank_branch;
       $this->BANK_BRANCH_CODE = $bank_branch_code;
       $this->TAX_REF_NUMBER = $tax_ref_number;
-      $this->CERTIFICATION_TYPE = $certification_type;
-      $this->CERTIFICATION_NUMBER = $certification_number;
+      $this->TYPE_FIRE = $type_fire;
+      $this->TYPE_SAFETY = $type_safety;
+      $this->TYPE_MEDICAL = $type_medical;
+      $this->FIRE_CERTIFICATE_NUMBER = $fire_certificate_number;
+      $this->HPSCA_NUMBER = $hpsca_number;
+      $this->SAIOSH_NUMBER = $saiosh_number;
       $this->ID_FILEPATH = $id_filepath;
       $this->DOCUMENT_FILEPATHS = $document_filepaths;
     }
@@ -187,14 +199,34 @@ class Crew
         return $this->TAX_REF_NUMBER;
     }
 
-    public function getCertificationType()
+    public function isFire()
     {
-        return $this->CERTIFICATION_TYPE;
+        return $this->TYPE_FIRE;
     }
 
-    public function getCertificationNumber()
+    public function isSafety()
     {
-        return $this->CERTIFICATION_NUMBER;
+        return $this->TYPE_SAFETY;
+    }
+
+    public function isMedical()
+    {
+        return $this->TYPE_MEDICAL;
+    }
+
+    public function getFireCertificateNumber()
+    {
+        return $this->FIRE_CERTIFICATE_NUMBER;
+    }
+
+    public function getHPSCANumber()
+    {
+        return $this->HPSCA_NUMBER;
+    }
+
+    public function getSAIOSHNumber()
+    {
+        return $this->SAIOSH_NUMBER;
     }
 
     public function getIdFilePath()
