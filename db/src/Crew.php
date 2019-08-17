@@ -13,6 +13,8 @@ class Crew
     /** @Column(type="date") **/
     protected $DATE_OF_BIRTH;
     /** @Column(type="string") **/
+    protected $EMAIL;
+    /** @Column(type="string") **/
     protected $CONTACT_NUMBER;
     /** @Column(type="string") **/
     protected $ID_PASSPORT_NUMBER;
@@ -67,11 +69,12 @@ class Crew
     protected $CREW_ASSIGNMENTS = null;
 
     //Constructor
-    public function __construct($crew_name = null, $crew_surname = null, $date_of_birth = null, $contact_number = null, $id_passport_number = null, $address = null, $area_code = null, $next_of_kin_name = null, $next_of_kin_contact_number = null, $race = null, $gender = null, $marital_status = null, $disabled = null, $bank_account_holder_name = null, $bank_account_number = null, $bank_name = null, $bank_branch = null, $bank_branch_code = null, $tax_ref_number = null, $type_fire = false, $type_safety = false, $type_medical = false, $fire_certificate_number = null, $hpsca_number = null, $saiosh_number = null, $id_filepath = null, $document_filepaths = null)
+    public function __construct($crew_name = null, $crew_surname = null, $date_of_birth = null, $email = null, $contact_number = null, $id_passport_number = null, $address = null, $area_code = null, $next_of_kin_name = null, $next_of_kin_contact_number = null, $race = null, $gender = null, $marital_status = null, $disabled = null, $bank_account_holder_name = null, $bank_account_number = null, $bank_name = null, $bank_branch = null, $bank_branch_code = null, $tax_ref_number = null, $type_fire = false, $type_safety = false, $type_medical = false, $fire_certificate_number = null, $hpsca_number = null, $saiosh_number = null, $id_filepath = null, $document_filepaths = null)
     {
       $this->CREW_NAME = $crew_name;
       $this->CREW_SURNAME = $crew_surname;
       $this->DATE_OF_BIRTH = $date_of_birth;
+      $this->EMAIL = $email;
       $this->CONTACT_NUMBER = $contact_number;
       $this->ID_PASSPORT_NUMBER = $id_passport_number;
       $this->ADDRESS = $address;
@@ -117,6 +120,11 @@ class Crew
     public function getDateOfBirth()
     {
         return $this->DATE_OF_BIRTH;
+    }
+
+    public function getEmail()
+    {
+        return $this->EMAIL;
     }
 
     public function getContactNumber()
