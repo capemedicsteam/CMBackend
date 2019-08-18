@@ -84,7 +84,7 @@ class Crew
       $this->RACE = $race;
       $this->GENDER = $gender;
       $this->MARITAL_STATUS = $marital_status;
-      $this->DISABILITY = $disability;
+      $this->DISABLED = $disabled;
       $this->BANK_ACCOUNT_HOLDER_NAME = $bank_account_holder_name;
       $this->BANK_ACCOUNT_NUMBER = $bank_account_number;
       $this->BANK_NAME = $bank_name;
