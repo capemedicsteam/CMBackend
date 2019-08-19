@@ -1,13 +1,13 @@
 <?php
 	session_start();
-	if($_GET['request_type'] == "script")
+	if($_POST['request_type'] == "script")
 	{
-		//Script authorisation
-		$none = array("RegisterCustomer");
-		if(in_array($_GET['target'], $none))
+		//Script authorisation and data transfer
+		$none = array("RegisterCustomer", "RegisterCrew");
+		if(in_array($_POST['target'], $none))
 		{
-				$header = "Location: scripts/".$_GET['target'].".php?";
-				foreach($_GET as $key => $value)
+				$header = "Location: scripts/".$_POST['target'].".php?";
+				foreach($_POST as $key => $value)
 				{
 					if($key != "target" && $key != "request_type")
 					{
@@ -15,6 +15,36 @@
 					}
 				}
 				$header = substr($header, 0, -1);
+				//Files
+				foreach($_FILES as $key => $fileInput)
+				{
+					if(is_array($fileInput["name"]))	//Checks if single or multiple file
+					{
+						$count = count($fileInput["name"]);
+						$filenames = [];
+						for($i = 0 ; $i < $count ; $i++)
+				    {
+				      $documentFilename = $fileInput["name"][$i];
+				      if(!move_uploaded_file($fileInput["tmp_name"][$i], "files/temp/".$documentFilename))
+				      {
+				        echo($twig->load("action-result.json")->render(["result" => "failure"]));
+				        exit();
+				      }
+							$filenames[$i] = $documentFilename;
+				    }
+					}
+					else
+					{
+						$documentFilename = $fileInput["name"];
+						if(!move_uploaded_file($fileInput["tmp_name"], "files/temp/".$documentFilename))
+						{
+							echo($twig->load("action-result.json")->render(["result" => "failure"]));
+							exit();
+						}
+						$filenames[0] = $documentFilename;
+					}
+					$_SESSION[$key] = $filenames;
+				}
 				header($header);
 				exit();
 		}
