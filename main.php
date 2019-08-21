@@ -1,9 +1,17 @@
 <?php
+	//Load Dependencies
 	session_start();
+	//Configure Twig manually in main.php since it is in the root folder
+	require_once "vendor/autoload.php";
+	$loader = new \Twig\Loader\FilesystemLoader('json');
+  $twig = new \Twig\Environment($loader, [
+      'cache' => '../twig-cache',
+  ]);
+	//Check request type
 	if($_POST['request_type'] == "script")
 	{
 		//Script authorisation and data transfer
-		$none = array("RegisterCustomer", "RegisterCrew");
+		$none = array("RegisterCustomer", "RegisterCrew", "Login");
 		if(in_array($_POST['target'], $none))
 		{
 				$header = "Location: scripts/".$_POST['target'].".php?";
@@ -27,7 +35,7 @@
 				      $documentFilename = $fileInput["name"][$i];
 				      if(!move_uploaded_file($fileInput["tmp_name"][$i], "files/temp/".$documentFilename))
 				      {
-				        echo($twig->load("action-result.json")->render(["result" => "failure"]));
+				        echo($twig->load("action-result.json")->render(["result" => "error_file"]));
 				        exit();
 				      }
 							$filenames[$i] = $documentFilename;
@@ -38,7 +46,7 @@
 						$documentFilename = $fileInput["name"];
 						if(!move_uploaded_file($fileInput["tmp_name"], "files/temp/".$documentFilename))
 						{
-							echo($twig->load("action-result.json")->render(["result" => "failure"]));
+							echo($twig->load("action-result.json")->render(["result" => "error_file"]));
 							exit();
 						}
 						$filenames[0] = $documentFilename;
