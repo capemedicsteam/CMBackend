@@ -25,9 +25,10 @@ class Booking
     protected $JOB = null;
 
     //Constructor
-    public function __construct($customer_id = null, $proposed_date = null, $type = null, $account = true)
+    public function __construct(Customer $customer, $proposed_date = null, $type = null, $account = true)
     {
-      $this->CUSTOMER_ID = $customer_id;
+      $CUSTOMER->addBooking($this);
+      $this->CUSTOMER = $customer;
       $this->PROPOSED_DATE = $proposed_date;
       $this->TYPE = $type;
       $this->CONFIRMED = false;

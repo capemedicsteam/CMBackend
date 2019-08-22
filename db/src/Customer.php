@@ -16,6 +16,8 @@ class Customer
     protected $COMPANY;
     /** @Column(type="string") **/
     protected $EMAIL;
+    /** @Column(type="double") **/
+    protected $BALANCE;
     /**
      * @OneToMany(targetEntity="Booking", mappedBy="CUSTOMER")
      * @var Booking[] An ArrayCollection of Bug objects.
@@ -58,6 +60,11 @@ class Customer
         return $this->EMAIL;
     }
 
+    public function getBalance()
+    {
+      return $this->BALANCE;
+    }
+
     public function getBookings()
     {
       return $this->BOOKINGS;
@@ -87,6 +94,16 @@ class Customer
     public function setEmail($email)
     {
         $this->EMAIL = $email;
+    }
+
+    public function increaseBalance($amount)
+    {
+      $this->BALANCE = $this->BALANCE + $amount;
+    }
+
+    public function decreaseBalance($amount)
+    {
+      $this->BALANCE = $this->BALANCE - $amount;
     }
 
     public function addBooking(Booking $booking)
