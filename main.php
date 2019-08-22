@@ -12,50 +12,78 @@
 	{
 		//Script authorisation and data transfer
 		$none = array("RegisterCustomer", "RegisterCrew", "Login");
-		if(in_array($_POST['target'], $none))
+		$customer = array("BookingAirsideTransfer");
+		if(in_array($_POST["target"]), $customer)
 		{
-				$header = "Location: scripts/".$_POST['target'].".php?";
-				foreach($_POST as $key => $value)
-				{
-					if($key != "target" && $key != "request_type")
-					{
-						$header = $header.$key."=".$value."&";
-					}
-				}
-				$header = substr($header, 0, -1);
-				//Files
-				foreach($_FILES as $key => $fileInput)
-				{
-					if(is_array($fileInput["name"]))	//Checks if single or multiple file
-					{
-						$count = count($fileInput["name"]);
-						$filenames = [];
-						for($i = 0 ; $i < $count ; $i++)
-				    {
-				      $documentFilename = $fileInput["name"][$i];
-				      if(!move_uploaded_file($fileInput["tmp_name"][$i], "files/temp/".$documentFilename))
-				      {
-				        echo($twig->load("action-result.json")->render(["result" => "error_file"]));
-				        exit();
-				      }
-							$filenames[$i] = $documentFilename;
-				    }
-					}
-					else
-					{
-						$documentFilename = $fileInput["name"];
-						if(!move_uploaded_file($fileInput["tmp_name"], "files/temp/".$documentFilename))
-						{
-							echo($twig->load("action-result.json")->render(["result" => "error_file"]));
-							exit();
-						}
-						$filenames[0] = $documentFilename;
-					}
-					$_SESSION[$key] = $filenames;
-				}
-				header($header);
+			if($_SESSION["userType"] != "Customer")
+			{
+				echo($twig->load("action-result.json")->render(["result" => "error_unauthorised"]));
 				exit();
+			}
 		}
+		else if(in_array($_POST["target"]), $crew)
+		{
+			if($_SESSION["userType"] != "Crew")
+			{
+				echo($twig->load("action-result.json")->render(["result" => "error_unauthorised"]));
+				exit();
+			}
+		}
+		else if(in_array($_POST["target"]), $admin)
+		{
+			if($_SESSION["userType"] != "Admin")
+			{
+				echo($twig->load("action-result.json")->render(["result" => "error_unauthorised"]));
+				exit();
+			}
+		}
+		else if(!in_array($_POST['target'], $none))
+		{
+			echo($twig->load("action-result.json")->render(["result" => "error_invalid_target"]));
+			exit();
+		}
+		//Data
+		$header = "Location: scripts/".$_POST['target'].".php?";
+		foreach($_POST as $key => $value)
+		{
+			if($key != "target" && $key != "request_type")
+			{
+				$header = $header.$key."=".$value."&";
+			}
+		}
+		$header = substr($header, 0, -1);
+		//Files
+		foreach($_FILES as $key => $fileInput)
+		{
+			if(is_array($fileInput["name"]))	//Checks if single or multiple file
+			{
+				$count = count($fileInput["name"]);
+				$filenames = [];
+				for($i = 0 ; $i < $count ; $i++)
+				{
+					$documentFilename = $fileInput["name"][$i];
+					if(!move_uploaded_file($fileInput["tmp_name"][$i], "files/temp/".$documentFilename))
+					{
+						echo($twig->load("action-result.json")->render(["result" => "error_file"]));
+						exit();
+					}
+					$filenames[$i] = $documentFilename;
+				}
+			}
+			else
+			{
+				$documentFilename = $fileInput["name"];
+				if(!move_uploaded_file($fileInput["tmp_name"], "files/temp/".$documentFilename))
+				{
+					echo($twig->load("action-result.json")->render(["result" => "error_file"]));
+					exit();
+				}
+				$filenames[0] = $documentFilename;
+			}
+			$_SESSION[$key] = $filenames;
+		}
+		header($header);
+		exit();
 	}
 
 	//
