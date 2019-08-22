@@ -3,7 +3,6 @@
   session_start();
   require_once "../db/db-connection.php";
   require_once "../inclusions/ConfigureTwig.php";
-  require_once "../inclusions/Common.php";
   if(!isset($_GET["email"]) || !isset($_GET["password"]))
   {
     echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
@@ -18,6 +17,7 @@
   if($user->verifyPassword($_GET["password"]))
   {
     $_SESSION["user"] = $user->getUserID();
+    $_SESSION["userType"] = $user->getType();
     echo($twig->load("user-login.json")->render(["type" => $user->getType()]));
     exit();
   }
