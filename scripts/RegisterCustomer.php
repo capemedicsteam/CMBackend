@@ -13,7 +13,7 @@
   $entityManager->persist($customer);
   $entityManager->flush();
   //Check if email address has already been used
-  if($entityManager->find("Customer", $_GET["email"])
+  if($entityManager->find("Customer", $_GET["email"]))
   {
     echo($twig->load("action-result.json")->render(["result" => "error_duplicate_email"]));
     exit();
