@@ -12,8 +12,10 @@
 	{
 		//Script authorisation and data transfer
 		$none = array("RegisterCustomer", "RegisterCrew", "Login");
-		$customer = array("BookingAirsideTransfer");
-		if(in_array($_POST["target"]), $customer)
+		$customer = array("BookAirsideTransfer");
+		$crew = array();
+		$admin = array();
+		if(in_array($_POST["target"], $customer))
 		{
 			if($_SESSION["userType"] != "Customer")
 			{
@@ -21,7 +23,7 @@
 				exit();
 			}
 		}
-		else if(in_array($_POST["target"]), $crew)
+		else if(in_array($_POST["target"], $crew))
 		{
 			if($_SESSION["userType"] != "Crew")
 			{
@@ -29,7 +31,7 @@
 				exit();
 			}
 		}
-		else if(in_array($_POST["target"]), $admin)
+		else if(in_array($_POST["target"], $admin))
 		{
 			if($_SESSION["userType"] != "Admin")
 			{
