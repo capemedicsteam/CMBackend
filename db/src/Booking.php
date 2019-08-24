@@ -16,19 +16,11 @@ class Booking
     protected $CONFIRMED;
     /** @Column(type="boolean") **/
     protected $ACCOUNT;
-    /** @ManyToOne(targetEntity="Customer", inversedBy="BOOKINGS") **/
-    protected $CUSTOMER;
-    /**
-     * @OneToMany(targetEntity="Job", mappedBy="BOOKING")
-     * @var Job An ArrayCollection of Bug objects.
-     **/
-    protected $JOB = null;
 
     //Constructor
     public function __construct(Customer $customer, $proposed_date = null, $type = null, $account = true)
     {
-      $CUSTOMER->addBooking($this);
-      $this->CUSTOMER = $customer;
+      $this->CUSTOMER_ID = $customer->getCustomerId();
       $this->PROPOSED_DATE = $proposed_date;
       $this->TYPE = $type;
       $this->CONFIRMED = false;
@@ -63,7 +55,7 @@ class Booking
 
     public function getCustomer()
     {
-        return $this->CUSTOMER;
+        return $entityManager->find("Customer", $this->CUSTOMER_ID);
     }
 
     //Mutators
@@ -89,12 +81,5 @@ class Booking
 
     public function setCustomer(Customer $customer)
     {
-        $CUSTOMER->addBooking($this);
-        $this->CUSTOMER = $customer;
+        $this->CUSTOMER_ID = $customer->getCustomerId();
     }
-
-    public function setJob(Job $job)
-    {
-      $this->JOB = $job;
-    }
-}
