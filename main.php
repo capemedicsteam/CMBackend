@@ -12,7 +12,7 @@
 	{
 		//Script authorisation and data transfer
 		$none = array("RegisterCustomer", "RegisterCrew", "Login");
-		$customer = array("BookAirsideTransfer");
+		$customer = array("BookAirsideTransfer", "BookOrganTransfer");
 		$crew = array();
 		$admin = array();
 		if(in_array($_POST["target"], $customer))
