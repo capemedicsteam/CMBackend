@@ -285,3 +285,4 @@ class BookingEvent
         $this->EXPECTED_EVENT_DURATION = $duration;
     }
 }
+?>

@@ -49,3 +49,4 @@ class CrewAssignment
         $this->JOB_ID = $id;
     }
 }
+?>

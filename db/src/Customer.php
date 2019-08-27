@@ -96,3 +96,4 @@ class Customer
       $this->BALANCE = $this->BALANCE - $amount;
     }
 }
+?>

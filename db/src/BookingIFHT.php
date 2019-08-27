@@ -205,3 +205,4 @@ class BookingIFHT
         $this->PATIENT_NATIONALITY = $nationality;
     }
 }
+?>

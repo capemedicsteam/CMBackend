@@ -90,3 +90,4 @@ class BookingTV
         $this->UNIT_TYPE = $type;
     }
 }
+?>

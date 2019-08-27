@@ -129,3 +129,4 @@ class BookingOrganTransfer
         $this->ARRIVAL_TIME = $time;
     }
 }
+?>

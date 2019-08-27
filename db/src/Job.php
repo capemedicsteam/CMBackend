@@ -69,3 +69,4 @@ class Job
       $this->CREW_ASSIGNMENTS[] = new CrewAssignment($crew->getCrewId(), $this);
     }
 }
+?>

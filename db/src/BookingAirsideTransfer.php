@@ -310,3 +310,4 @@ class BookingAirsideTransfer
       unlink("../../data/airside_transfer/".$this->BOOKING_ID.".txt");
     }
 }
+?>
