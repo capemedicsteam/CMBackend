@@ -22,7 +22,6 @@
   $entityManager->flush();
   //Create Airside Transfer
   $bookingAT = new BookingAirsideTransfer($booking->getBookingId(), $_GET["flightType"], Common::toDate($_GET["flightDate"]), $_GET["flightNumber"], $_GET["flightDepAirport"], $_GET["flightArrAirport"], Common::toTime($_GET["flightDepTime"]), Common::toTime($_GET["flightArrTime"]), $_GET["flightTerminalType"], $_GET["careLevel"], $_GET["patName"], $_GET["patSurname"], $_GET["patIdPassport"], $_GET["patCaseRef"]);
-  echo($_GET["flightDepTime"]);
   if(isset($_GET["flightEscortRequired"]))
   {
     $bookingAT->setFlightMedicalEscortRequired($_GET["flightEscortRequired"]);
@@ -31,32 +30,40 @@
   {
     $bookingAT->setAmbulanceEscortRequired($_GET["ambulanceEscortRequired"]);
   }
-
   if(isset($_GET["longDistance"]))
   {
     $bookingAT->setGroundAmbulanceTravelDistanceGreaterThan100km($_GET["longDistance"]);
   }
-
   if(isset($_GET["ambulanceDepFacility"]))
   {
     $bookingAT->setGroundAmbulanceDepartureFacility($_GET["ambulanceDepFacility"]);
   }
-
   if(isset($_GET["ambulanceDepFacilityTime"]))
   {
     $bookingAT->setGroundAmbulanceDepartureFacilityPickupTime(Common::toTime($_GET["ambulanceDepFacilityTime"]));
   }
-
   if(isset($_GET["ambulanceArrFacility"]))
   {
     $bookingAT->setGroundAmbulanceArrivalFacility($_GET["ambulanceArrFacility"]);
   }
-
   if(isset($_GET["ambulanceArrFacilityTime"]))
   {
     $bookingAT->setGroundAmbulanceArrivalFacilityPickupTime(Common::toTime($_GET["ambulanceArrFacilityTime"]));
   }
   $entityManager->persist($bookingAT);
   $entityManager->flush();
+  //Data to be written to file
+  if(isset($_GET["extraInfo"]))
+  {
+    $file = fopen("../files/booking_airside_transfer/".$bookingAT.getBookingId().".booking", "w");
+    if($file == false)
+    {
+      echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
+      exit();
+    }
+    fwrite($file, serialize($_GET["extraInfo"]));
+    fclose("extraInfo");
+    $fileData["extraInfo"] = $_GET["extraInfo"];
+  }
   echo($twig->load("action-result.json")->render(["result" => "success"]));
 ?>
