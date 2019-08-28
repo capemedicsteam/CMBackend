@@ -21,7 +21,7 @@
   $entityManager->persist($booking);
   $entityManager->flush();
   //Create Airside Transfer
-  $bookingOT = new BookingAirsideTransfer($booking->getBookingId(), $_GET["service"], $_GET["airline"], $_GET["flightNumber"], $_GET["flightDepAirport"], $_GET["flightArrAirport"], Common::toDate($_GET["flightDate"]), Common::toTime($_GET["flightDepTime"]), Common::toTime($_GET["flightArrTime"]));
+  $bookingOT = new BookingOrganTransfer($booking->getBookingId(), $_GET["service"], $_GET["airline"], $_GET["flightNumber"], $_GET["flightDepAirport"], $_GET["flightArrAirport"], Common::toDate($_GET["flightDate"]), Common::toTime($_GET["flightDepTime"]), Common::toTime($_GET["flightArrTime"]));
   $entityManager->persist($bookingOT);
   $entityManager->flush();
   echo($twig->load("action-result.json")->render(["result" => "success"]));
