@@ -19,7 +19,7 @@ class BookingEvent
     /** @Column(type="integer") **/
     protected $PAX;
     /** @Column(type="string") **/
-    protected $DESCRIPTON;
+    protected $DESCRIPTION;
     /** @Column(type="boolean") **/
     protected $BUILD_UP_REQUIRED;
     /** @Column(type="datetime") **/
@@ -55,7 +55,7 @@ class BookingEvent
       $this->EVENT_START_DATE_TIME = $event_start_date_time;
       $this->EVENT_END_DATE_TIME = $event_end_date_time;
       $this->LOCATION = $location;
-      $this->EVENT_NAME = $EVENT_NAME;
+      $this->EVENT_NAME = $event_name;
       $this->PAX = $pax;
       $this->DESCRIPTION = $description;
       $this->BUILD_UP_REQUIRED = $build_up_required;
