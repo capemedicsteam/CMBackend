@@ -9,5 +9,9 @@
     {
       return DateTime::createFromFormat("H:i", $timeString);
     }
+    public static function toDateTime($datetimeString)
+    {
+      return DateTime::createFromFormat("d/m/Y,H:i", $datetimeString);
+    }
   }
 ?>
