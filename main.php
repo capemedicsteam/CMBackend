@@ -12,12 +12,12 @@
 	{
 		//Script authorisation and data transfer
 		$none = array("RegisterCustomer", "RegisterCrew", "Login");
-		$customer = array("BookAirsideTransfer", "BookOrganTransfer", "BookEvent");
+		$customer = array("BookAirsideTransfer", "BookOrganTransfer", "BookEvent", "BookTV");
 		$crew = array();
 		$admin = array();
 		if(in_array($_POST["target"], $customer))
 		{
-			if($_SESSION["userType"] != "Customer")
+			if($_SESSION["userType"] != "Customer" && substr($POST["target"], 0, 4) != "Book")	//Bookings can be made without logging in
 			{
 				echo($twig->load("action-result.json")->render(["result" => "error_unauthorised"]));
 				exit();

@@ -5,7 +5,7 @@
   require_once "../inclusions/ConfigureTwig.php";
   require_once "../inclusions/Common.php";
   //Check if all required data is present
-  if(!isset($_GET["service"]) || !isset($_GET["airline"]) || !isset($_GET["flightNumber"]) || !isset($_GET["flightDepAirport"]) || !isset($_GET["flightArrAirport"]) || !isset($_GET["flightDate"]) || !isset($_GET["flightDepTime"]) || !isset($_GET["flightArrTime"]))
+  if(!isset($_GET["longDistance"]) || !isset($_GET["fromLocationType"]) || !isset($_GET["fromAddress"]) || !isset($_GET["fromDateTime"]) || !isset($_GET["toLocationType"]) || !isset($_GET["toAddress"]) || !isset($_GET["toDateTime"]) || !isset($_GET["patName"]) || !isset($_GET["patSurname"]) || !isset($_GET["patIdPassport"]) || !isset($_GET["patCaseRef"]) || !isset($_GET["patNationality"]))
   {
     echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
     exit();
@@ -27,19 +27,23 @@
     $entityManager->flush();
   }
   //Create booking
-  $booking = new Booking($customer, Common::toDate($_GET["flightDate"]), "o");
-  if(isset($_GET["account"]))
-  {
-    $booking->setAccount($_GET["account"]);
-  }
+  $booking = new Booking($customer, Common::toDate($_GET["date"]), "t");
   $entityManager->persist($booking);
   $entityManager->flush();
-  //Create Airside Transfer
-  $bookingOT = new BookingOrganTransfer($booking->getBookingId(), $_GET["service"], $_GET["airline"], $_GET["flightNumber"], $_GET["flightDepAirport"], $_GET["flightArrAirport"], Common::toDate($_GET["flightDate"]), Common::toTime($_GET["flightDepTime"]), Common::toTime($_GET["flightArrTime"]));
-  $entityManager->persist($bookingOT);
+  //Create IFHT
+  $bookingIFHT = new BookingIFHT($booking->getBookingId(), $_GET["longDistance"], $_GET["fromLocationType"], $_GET["fromAddress"], Common::toDateTime($_GET["fromDateTime"]), $_GET["toLocationType"], $_GET["toAddress"], Common::toDateTime($_GET["toDateTime"], null, null, $_GET["patName"], $_GET["patSurname"], $_GET["patIdPassport"], $_GET["patCaseRef"], $_GET["patNationality"]);
+  if(isset($_GET["returnTrip"]))
+  {
+    $bookingIFHT.setReturnTrip($_GET["returnTrip"]);
+  }
+  if(isset($_GET["returnTime"]))
+  {
+    $bookingIFHT.setReturnTime(Common::toTime($_GET["returnTime"]));
+  }
+  $entityManager->persist($bookingIFHT);
   $entityManager->flush();
   //Data to be written to file
-  $exclusions = array("service", "airline", "flightNumber", "flightDepAirport", "flightArrAirport", "flightDate", "flightDepTime", "flightArrTime");
+  $exclusions = array("longDistance", "fromLocationType", "fromAddress", "fromDateTime", "toLocationType", "toAddress", "toDateTime", "patName", "patSurname", "patIdPassport", "patCaseRef", "patNationality", "returnTrip", "returnTime");
   $fileObject;
   foreach($_GET as $key => $value)
   {

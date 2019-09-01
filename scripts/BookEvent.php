@@ -10,8 +10,22 @@
     echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
     exit();
   }
-  //Get Customer
-  $customer = $entityManager->find("Customer", $_SESSION["user"]);
+  //Get or create customer
+  if(isset($_SESSION["user"]))
+  {
+    $customer = $entityManager->find("Customer", $_SESSION["user"]);
+  }
+  else
+  {
+    if(!isset($_GET["custName"]) || !isset($_GET["custSurname"]) || !isset($_GET["custNumber"]) || !isset($_GET["custCompany"]) || !isset($_GET["custEmail"]))
+    {
+      echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
+      exit();
+    }
+    $customer = new Customer($_GET["custName"], $_GET["custSurname"], $_GET["custNumber"], $_GET["custCompany"], $_GET["custEmail"]);
+    $entityManager->persist($customer);
+    $entityManager->flush();
+  }
   //Create booking
   $booking = new Booking($customer, Common::toDateTime($_GET["eventStartDateTime"]), "e");
   if(isset($_GET["account"]))
@@ -80,5 +94,26 @@
   }
   $entityManager->persist($bookingEvent);
   $entityManager->flush();
+  //Data to be written to file
+  $exclusions = array("eventType", "eventStartDateTime", "eventEndDateTime", "location", "eventName", "pax", "description", "buRequired", "buStartDateTime", "buEndDateTime", "strikeRequired", "strikeStartDateTime", "strikeEndDateTime", "eventNature", "attendeesSSB", "expectedNumbers", "toy", "venue", "attendeesType", "eventDuration");
+  $fileObject;
+  foreach($_GET as $key => $value)
+  {
+    if(!in_array($key, $exclusions))
+    {
+        $fileObject[$key] = $value;
+    }
+  }
+  if(isset($fileObject != null))
+  {
+    $file = fopen("../files/booking_event/".$bookingAT.getBookingId().".booking", "w");
+    if($file == false)
+    {
+      echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
+      exit();
+    }
+    fwrite($file, serialize($fileObject));
+    fclose($file);
+  }
   echo($twig->load("action-result.json")->render(["result" => "success"]));
 ?>

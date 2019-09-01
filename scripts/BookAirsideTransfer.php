@@ -10,8 +10,22 @@
     echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
     exit();
   }
-  //Get Customer
-  $customer = $entityManager->find("Customer", $_SESSION["user"]);
+  //Get or create customer
+  if(isset($_SESSION["user"]))
+  {
+    $customer = $entityManager->find("Customer", $_SESSION["user"]);
+  }
+  else
+  {
+    if(!isset($_GET["custName"]) || !isset($_GET["custSurname"]) || !isset($_GET["custNumber"]) || !isset($_GET["custCompany"]) || !isset($_GET["custEmail"]))
+    {
+      echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
+      exit();
+    }
+    $customer = new Customer($_GET["custName"], $_GET["custSurname"], $_GET["custNumber"], $_GET["custCompany"], $_GET["custEmail"]);
+    $entityManager->persist($customer);
+    $entityManager->flush();
+  }
   //Create booking
   $booking = new Booking($customer, Common::toDate($_GET["flightDate"]), "a");
   if(isset($_GET["account"]))
@@ -53,7 +67,16 @@
   $entityManager->persist($bookingAT);
   $entityManager->flush();
   //Data to be written to file
-  if(isset($_GET["extraInfo"]))
+  $exclusions = array("flightType", "flightDate", "flightNumber", "flightDepAirport", "flightArrAirport", "flightDepTime", "flightArrTime", "flightTerminalType", "careLevel", "patName", "patSurname", "patIdPassport", "patCaseRef", "account", "flightEscortRequired", "ambulanceEscortRequired", "longDistance", "ambulanceDepFacility", "ambulanceDepFacilityTime", "ambulanceArrFaciliy", "ambulanceArrFacilityTime");
+  $fileObject;
+  foreach($_GET as $key => $value)
+  {
+    if(!in_array($key, $exclusions))
+    {
+        $fileObject[$key] = $value;
+    }
+  }
+  if(isset($fileObject != null))
   {
     $file = fopen("../files/booking_airside_transfer/".$bookingAT.getBookingId().".booking", "w");
     if($file == false)
@@ -61,9 +84,8 @@
       echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
       exit();
     }
-    fwrite($file, serialize($_GET["extraInfo"]));
-    fclose("extraInfo");
-    $fileData["extraInfo"] = $_GET["extraInfo"];
+    fwrite($file, serialize($fileObject));
+    fclose($file);
   }
   echo($twig->load("action-result.json")->render(["result" => "success"]));
 ?>

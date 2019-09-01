@@ -5,7 +5,7 @@
   require_once "../inclusions/ConfigureTwig.php";
   require_once "../inclusions/Common.php";
   //Check if all required data is present
-  if(!isset($_GET["service"]) || !isset($_GET["airline"]) || !isset($_GET["flightNumber"]) || !isset($_GET["flightDepAirport"]) || !isset($_GET["flightArrAirport"]) || !isset($_GET["flightDate"]) || !isset($_GET["flightDepTime"]) || !isset($_GET["flightArrTime"]))
+  if(!isset($_GET["type"]) || !isset($_GET["projectName"]) || !isset($_GET["dateTime"]) || !isset($_GET["location"]) || !isset($_GET["unitType"]))
   {
     echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
     exit();
@@ -27,19 +27,15 @@
     $entityManager->flush();
   }
   //Create booking
-  $booking = new Booking($customer, Common::toDate($_GET["flightDate"]), "o");
-  if(isset($_GET["account"]))
-  {
-    $booking->setAccount($_GET["account"]);
-  }
+  $booking = new Booking($customer, Common::toDate($_GET["date"]), "t");
   $entityManager->persist($booking);
   $entityManager->flush();
-  //Create Airside Transfer
-  $bookingOT = new BookingOrganTransfer($booking->getBookingId(), $_GET["service"], $_GET["airline"], $_GET["flightNumber"], $_GET["flightDepAirport"], $_GET["flightArrAirport"], Common::toDate($_GET["flightDate"]), Common::toTime($_GET["flightDepTime"]), Common::toTime($_GET["flightArrTime"]));
-  $entityManager->persist($bookingOT);
+  //Create TV
+  $bookingTV = new BookingTV($booking->getBookingId(), $_GET["type"], $_GET["projectName"], Common::toDateTime($_GET["dateTime"]), $_GET["location"], $_GET["unitType"]);
+  $entityManager->persist($bookingTV);
   $entityManager->flush();
   //Data to be written to file
-  $exclusions = array("service", "airline", "flightNumber", "flightDepAirport", "flightArrAirport", "flightDate", "flightDepTime", "flightArrTime");
+  $exclusions = array("type", "projectName", "dateTime", "location", "unitType");
   $fileObject;
   foreach($_GET as $key => $value)
   {
