@@ -87,6 +87,55 @@
 		header($header);
 		exit();
 	}
+	if($_POST['request_type'] == "get")
+	{
+		//Script authorisation and data transfer
+		$none = array("allBookings");
+		$customer = array();
+		$crew = array();
+		$admin = array();
+		if(in_array($_POST["target"], $customer))
+		{
+			if($_SESSION["userType"] != "Customer")
+			{
+				echo($twig->load("action-result.json")->render(["result" => "error_unauthorised"]));
+				exit();
+			}
+		}
+		else if(in_array($_POST["target"], $crew))
+		{
+			if($_SESSION["userType"] != "Crew")
+			{
+				echo($twig->load("action-result.json")->render(["result" => "error_unauthorised"]));
+				exit();
+			}
+		}
+		else if(in_array($_POST["target"], $admin))
+		{
+			if($_SESSION["userType"] != "Admin")
+			{
+				echo($twig->load("action-result.json")->render(["result" => "error_unauthorised"]));
+				exit();
+			}
+		}
+		else if(!in_array($_POST['target'], $none))
+		{
+			echo($twig->load("action-result.json")->render(["result" => "error_invalid_target"]));
+			exit();
+		}
+		//Data
+		$header = "Location: get/".$_POST['target'].".php?";
+		foreach($_POST as $key => $value)
+		{
+			if($key != "target" && $key != "request_type")
+			{
+				$header = $header.$key."=".$value."&";
+			}
+		}
+		$header = substr($header, 0, -1);
+		header($header);
+		exit();
+	}
 
 	//
 	// if($_POST['request_type'] == "page")	//For users trying to access web pages
