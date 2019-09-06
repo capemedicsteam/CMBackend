@@ -13,5 +13,9 @@
     {
       return DateTime::createFromFormat("d/m/Y,H:i", $datetimeString);
     }
+    public static function toDateString($date)
+    {
+      return date_format($date, "d/m/Y");
+    }
   }
 ?>
