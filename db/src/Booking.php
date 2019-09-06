@@ -53,9 +53,9 @@
           return $this->ACCOUNT;
       }
 
-      public function getCustomer()
+      public function getCustomerId()
       {
-          return $entityManager->find("Customer", $this->CUSTOMER_ID);
+          return $this->CUSTOMER_ID;
       }
 
       //Mutators
