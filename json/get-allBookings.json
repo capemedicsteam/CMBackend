@@ -5,9 +5,9 @@
                         "number": "{{booking.number}}",
                         "email": "{{booking.email}}",
                         "date": "{{booking.date}}",
-                        "time": "{{booking.time}}",
                         "type": "{{booking.type}}",
-                        "status": {"type":"{{booking.statusType}}", "colour":"{{booking.statusColour}}", "text":"{{booking.statusText}}"}
+                        "status": "{{booking.status}}",
+                        "account": "{{booking.account}}"
   }{%if not loop.last%},{%endif%}
   {%endfor%}
 }
