@@ -62,7 +62,7 @@
   }
   if(isset($_GET["ambulanceArrFacilityTime"]))
   {
-    $bookingAT->setGroundAmbulanceArrivalFacilityPickupTime(Common::toTime($_GET["ambulanceArrFacilityTime"]));
+    $bookingAT->setGroundAmbulanceArrivalAirportPickupTime(Common::toTime($_GET["ambulanceArrFacilityTime"]));
   }
   $entityManager->persist($bookingAT);
   $entityManager->flush();
