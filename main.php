@@ -11,7 +11,7 @@
 	if($_POST['request_type'] == "script")
 	{
 		//Script authorisation and data transfer
-		$none = array("RegisterCustomer", "RegisterCrew", "Login");
+		$none = array("RegisterCustomer", "RegisterCrew", "Login", "UpdateBooking");	//UpdateBooking is admin
 		$customer = array("BookAirsideTransfer", "BookEvent", "BookIFHT", "BookOrganTransfer", "BookTV");
 		$crew = array("VehicleChecklist");
 		$admin = array();
