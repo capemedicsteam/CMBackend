@@ -2,11 +2,12 @@
   {%for customer in customers%}
   "{{customer.id}}" : {
                         "name": "{{customer.name}}",
+                        "surname": {{customer.surname}},
                         "number": "{{customer.number}}",
                         "email": "{{customer.email}}",
                         "company": "{{customer.company}}",
                         "bookings": "{{customer.bookings}}",
-                        "last_booking": "{{customer.lastBooking}}"
+                        "balance": "{{customer.balance}}"
   }{%if not loop.last%},{%endif%}
   {%endfor%}
 }
