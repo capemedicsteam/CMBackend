@@ -40,6 +40,11 @@ class Customer
         return $this->CUSTOMER_NAME;
     }
 
+    public function getCustomerSurname()
+    {
+      return $this->CUSTOMER_SURNAME;
+    }
+
     public function getContactNumber()
     {
         return $this->CONTACT_NUMBER;
