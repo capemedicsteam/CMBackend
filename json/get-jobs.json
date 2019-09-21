@@ -1,0 +1,14 @@
+{
+  {%for job in jobs%}
+  "{{job.id}}" : {
+                        "name": "{{job.name}}",
+                        "surname": "{{job.surname}}",
+                        "number": "{{job.number}}",
+                        "email": "{{job.email}}",
+                        "type": "{{job.type}}",
+                        "date": "{{job.date}}",
+                        "crew_required": "{{job.crew}}"
+                      }
+  }{%if not loop.last%},{%endif%}
+  {%endfor%}
+}
