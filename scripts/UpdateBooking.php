@@ -13,7 +13,14 @@
   $booking = $entityManager->find("Booking", $_GET["id"]);
   if(isset($_GET["confirmed"]))
   {
-    $booking->setConfirmed($_GET["confirmed"]);
+    $booking->setConfirmed(true);
+    $job = new Job($booking->getBookingId());
+    if(isset($_GET["crew_required"]))
+    {
+      $job->setCrewRequired($_GET["crew_required"]);
+    }
+    $entityManager->persist($job);
+    $entityManager->flush();
   }
   if(isset($_GET["account"]))
   {
