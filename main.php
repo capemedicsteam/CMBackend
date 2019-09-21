@@ -90,7 +90,7 @@
 	if($_POST['request_type'] == "get")
 	{
 		//Script authorisation and data transfer
-		$none = array("bookings", "customers");
+		$none = array("Bookings", "Customers", "Crew", "Jobs");	//Admin
 		$customer = array();
 		$crew = array();
 		$admin = array();
