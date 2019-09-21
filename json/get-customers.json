@@ -2,7 +2,7 @@
   {%for customer in customers%}
   "{{customer.id}}" : {
                         "name": "{{customer.name}}",
-                        "surname": {{customer.surname}},
+                        "surname": "{{customer.surname}}",
                         "number": "{{customer.number}}",
                         "email": "{{customer.email}}",
                         "company": "{{customer.company}}",
