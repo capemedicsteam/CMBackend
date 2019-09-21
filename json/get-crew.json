@@ -1,0 +1,12 @@
+{
+  {%for member in crew%}
+  "{{member.id}}" : {
+                        "name": "{{member.name}}",
+                        "surname": "{{member.surname}}",
+                        "number": "{{member.number}}",
+                        "email": "{{member.email}}",
+                        "qualification": "{{member.qualification}}"
+                    }
+  }{%if not loop.last%},{%endif%}
+  {%endfor%}
+}
