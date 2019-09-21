@@ -20,11 +20,11 @@
       break;
       case "e": $output[$count]["type"] = "Event";
       break;
-      case "i": $output[$count]["type"] = "IFT / IHT";
+      case "i": $output[$count]["type"] = "IFT/IHT";
       break;
       case "o": $output[$count]["type"] = "Organ Transfer";
       break;
-      case "t": $output[$count]["type"] = "Film / Commercial";
+      case "t": $output[$count]["type"] = "Film/Commercial";
       break;
       default: $output[$count]["type"] = $booking->getType();
       break;
