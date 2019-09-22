@@ -10,10 +10,6 @@ class CrewAssignment
     protected $CREW_ID;
     /** @Column(type="integer") **/
     protected $JOB_ID;
-    /** @ManyToOne(targetEntity="Job", inversedBy="CREW_ASSIGNMENTS") **/
-    protected $JOB;
-    /** @ManyToOne(targetEntity="Crew", inversedBy="CREW_ASSIGNMENTS") **/
-    protected $CREW;
 
     //Constructor
     public function __construct($crew_id = null, $job_id = null)
@@ -28,14 +24,14 @@ class CrewAssignment
         return $this->LINK_ID;
     }
 
-    public function getCrew()
+    public function getCrewId()
     {
-        return $this->CREW;
+        return $this->CREW_ID;
     }
 
-    public function getJob()
+    public function getJobId()
     {
-        return $this->JOB;
+        return $this->JOB_ID;
     }
 
     //Mutators
