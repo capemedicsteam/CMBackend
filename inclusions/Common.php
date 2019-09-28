@@ -17,5 +17,17 @@
     {
       return date_format($date, "d/m/Y");
     }
+    public static function incrementDate($date)
+    {
+      $dateInc = Common::toDate(Common::toDateString($date));
+      $dateInc->modify("+1 day");
+      return $dateInc;
+    }
+    public static function decrementDate($date)
+    {
+      $dateDec = Common::toDate(Common::toDateString($date));
+      $dateDec->modify("-1 day");
+      return $dateDec;
+    }
   }
 ?>
