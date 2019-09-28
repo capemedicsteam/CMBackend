@@ -1,0 +1,15 @@
+{
+  {%for date,jobs in data%}
+  "{{date}}" : {
+                {%for job in jobs%}
+                  "{{job.id}}" : {
+                                    "name": "{{job.name}}",
+                                    "surname": "{{job.surname}}",
+                                    "type": "{{job.type}}"
+
+                                  }{%if not loop.last%},{%endif%}
+
+                {%endfor%}
+                }{%if not loop.last%},{%endif%}
+  {%endfor%}
+}
