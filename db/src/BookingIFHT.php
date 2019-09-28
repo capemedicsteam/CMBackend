@@ -18,6 +18,8 @@ class BookingIFHT
     protected $TO_LOCATION_TYPE;
     /** @Column(type="string") **/
     protected $TO_ADDRESS;
+    /** @Column(type="datetime") **/
+    protected $TO_DATE_TIME;
     /** @Column(type="boolean") **/
     protected $RETURN_TRIP;
     /** @Column(type="time") **/
