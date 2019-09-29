@@ -17,6 +17,10 @@
     {
       return date_format($date, "d/m/Y");
     }
+    public static function toDateTimeString($datetime)
+    {
+      return date_format($datetime, "d/m/Y,H:i");
+    }
     public static function incrementDate($date)
     {
       $dateInc = Common::toDate(Common::toDateString($date));
