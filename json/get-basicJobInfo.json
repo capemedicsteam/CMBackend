@@ -1,0 +1,16 @@
+{
+  "type": "{{type}}",
+  "name": "{{name}}",
+  "surname": "{{surname}}",
+  "number": "{{number}}",
+  "company": "{{company}}",
+  "email": "{{email}}",
+  "start_date_time": "{{startDateTime}}",
+  "end_date_time": "{{endDateTime}}",
+  "crew_required": "{{crewRequired}}",
+  "crew_assigned": {
+                      {%for id, name in crew%}
+                        "{{id}}": "{{name}}"{%if not loop.last%},{%endif%}
+                      {%endfor%}
+                    }
+}
