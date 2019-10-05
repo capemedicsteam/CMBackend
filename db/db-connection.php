@@ -10,6 +10,7 @@ require_once "src/BookingEvent.php";
 require_once "src/BookingIFHT.php";
 require_once "src/BookingOrganTransfer.php";
 require_once "src/BookingTV.php";
+require_once "src/CheckIn.php"
 require_once "src/Crew.php";
 require_once "src/CrewAssignment.php";
 require_once "src/Customer.php";
