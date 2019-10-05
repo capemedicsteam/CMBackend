@@ -17,6 +17,10 @@
     {
       return date_format($date, "d/m/Y");
     }
+    public static function toTimeString($time)
+    {
+      return date_format($time, "H:i");
+    }
     public static function toDateTimeString($datetime)
     {
       return date_format($datetime, "d/m/Y,H:i");
