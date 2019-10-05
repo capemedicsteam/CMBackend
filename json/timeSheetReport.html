@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <style>
+      table
+      {
+        width: 100%;
+      }
+      td
+      {
+        border: solid;
+        border-width: thin;
+        text-align: center;
+      }
+      #header
+      {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Crew Time Sheet</h1>
+    <h2>Name: {{name}}</h2>
+    <h3>Range: {{startDate}} - {{endDate}}</h3>
+    <table cellspacing=0>
+      <tr id="header">
+        <td>Id</td>
+        <td>Date</td>
+        <td>Time In</td>
+        <td>Time Out</td>
+      </tr>
+      {%for checkIn in checkIns%}
+        <tr>
+          <td>{{checkIn.id}}</td>
+          <td>{{checkIn.date}}</td>
+          <td>{{checkIn.timeIn}}</td>
+          <td>{{checkIn.timeOut}}</td>
+        </tr>
+      {%endfor%}
+    </table>
+  </body>
+</html>

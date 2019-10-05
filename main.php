@@ -90,7 +90,7 @@
 	if($_POST['request_type'] == "get")
 	{
 		//Script authorisation and data transfer
-		$none = array("Bookings", "Customers", "Crew", "Jobs", "JobsForDateRange", "BasicJobInfo");	//Admin (JobsForDateRange is authenticated in situ) - BasicJobInfo does not require authentication
+		$none = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport", "JobsForDateRange", "BasicJobInfo");	//Admin (JobsForDateRange is authenticated in situ) - BasicJobInfo does not require authentication
 		$customer = array();
 		$crew = array();
 		$admin = array();
