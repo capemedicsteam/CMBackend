@@ -16,6 +16,7 @@
   }
   if($user->verifyPassword($_GET["password"]))
   {
+    $_SESSION["email"] = $user->getEmail();
     $_SESSION["user"] = $user->getUserID();
     $_SESSION["userType"] = $user->getType();
     echo($twig->load("user-login.json")->render(["type" => $user->getType()]));
