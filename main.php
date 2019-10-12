@@ -11,10 +11,10 @@
 	if($_POST['request_type'] == "script")
 	{
 		//Script authorisation and data transfer
-		$none = array("RegisterCustomer", "RegisterCrew", "Login", "UpdateBooking", "AssignCrew");	//UpdateBooking, AssignCrew is admin
+		$none = array("RegisterCustomer", "RegisterCrew", "Login", "ChangePassword");	//ChangePassword is authenticated in situ
 		$customer = array("BookAirsideTransfer", "BookEvent", "BookIFHT", "BookOrganTransfer", "BookTV");
 		$crew = array("VehicleChecklist");
-		$admin = array();
+		$admin = array("UpdateBooking", "AssignCrew");
 		if(in_array($_POST["target"], $customer))
 		{
 			if($_SESSION["userType"] != "Customer" && substr($POST["target"], 0, 4) != "Book")	//Bookings can be made without logging in
@@ -90,10 +90,10 @@
 	if($_POST['request_type'] == "get")
 	{
 		//Script authorisation and data transfer
-		$none = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport", "JobsForDateRange", "BasicJobInfo");	//Admin (JobsForDateRange is authenticated in situ) - BasicJobInfo does not require authentication
+		$none = array("JobsForDateRange", "BasicJobInfo");	//JobsForDateRange is authenticated in situ | BasicJobInfo does not require authentication
 		$customer = array();
 		$crew = array();
-		$admin = array();
+		$admin = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport");
 		if(in_array($_POST["target"], $customer))
 		{
 			if($_SESSION["userType"] != "Customer")
