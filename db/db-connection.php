@@ -19,10 +19,10 @@ require_once "src/User.php";
 //Create database connection
 $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src"), true);
 $connectionParams = array(
-  'dbname' => 'epiz_24871281_capemedics',
-  'user' => 'epiz_24871281',
-  'password' => 'capemedicsDev',
-  'host' => 'sql111.epizy.com',
+  'dbname' => 'capemedics_2019',
+  'user' => 'capemedics',
+  'password' => 'rvvN69k7pH8qm95nFBS8',
+  'host' => 'sql45.jnb2.host-h.net',
   'port' => '3306',
   'driver' => 'pdo_mysql'
 );
