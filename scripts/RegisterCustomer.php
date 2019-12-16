@@ -1,5 +1,6 @@
 <?php
   //Load Dependencies
+  header("Access-Control-Allow-Origin: *");
   require_once "../db/db-connection.php";
   require_once "../inclusions/ConfigureTwig.php";
   //Check if all required data is present

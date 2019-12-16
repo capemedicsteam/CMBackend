@@ -1,6 +1,7 @@
 <?php
 	//Load Dependencies
 	session_start();
+	header("Access-Control-Allow-Origin: *");
 	//Configure Twig manually in main.php since it is in the root folder
 	require_once "vendor/autoload.php";
 	$loader = new \Twig\Loader\FilesystemLoader('json');

@@ -1,6 +1,7 @@
 <?php
   //Load Dependencies
   session_start();
+  header("Access-Control-Allow-Origin: *");
   require_once "../db/db-connection.php";
   require_once "../inclusions/ConfigureTwig.php";
   if(!isset($_GET["email"]) || !isset($_GET["password"]))

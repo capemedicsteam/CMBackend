@@ -1,6 +1,7 @@
 <?php
   //Load Dependencies
   session_start();
+  header("Access-Control-Allow-Origin: *");
   require_once "../db/db-connection.php";
   require_once "../inclusions/ConfigureTwig.php";
   require_once "../inclusions/Common.php";
