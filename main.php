@@ -92,7 +92,7 @@
 	{
 		//Script authorisation and data transfer
 		$none = array("JobsForDateRange", "BasicJobInfo");	//JobsForDateRange is authenticated in situ | BasicJobInfo does not require authentication
-		$customer = array();
+		$customer = array("MyBookings");
 		$crew = array();
 		$admin = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport");
 		if(in_array($_POST["target"], $customer))

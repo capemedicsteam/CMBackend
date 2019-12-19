@@ -1,0 +1,10 @@
+{
+  {%for booking in bookings%}
+  "{{booking.id}}" : {
+                        "date": "{{booking.date}}",
+                        "type": "{{booking.type}}",
+                        "status": "{{booking.status}}",
+                        "account": "{{booking.account}}"
+  }{%if not loop.last%},{%endif%}
+  {%endfor%}
+}
