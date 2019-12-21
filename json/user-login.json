@@ -1,4 +1,7 @@
 {
   "result":"success",
-  "type":"{{type}}"
+  "type":"{{type}}",
+  "name":"{{name}}",
+  "surname": "{{surname}}",
+  "id":"{{id}}"
 }
