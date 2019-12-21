@@ -8,6 +8,12 @@
   $twig = new \Twig\Environment($loader, [
       'cache' => '../twig-cache',
   ]);
+	//Check if required parameters are present
+  if(!isset($_POST['request_type']) || !isset($_POST['target']))
+  {
+		echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
+		exit();
+  }
 	//Check request type
 	if($_POST['request_type'] == "script")
 	{
