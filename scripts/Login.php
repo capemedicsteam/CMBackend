@@ -21,7 +21,7 @@
     $_SESSION["user"] = $user->getUserID();
     $_SESSION["userType"] = $user->getType();
     $name = "admin";
-    $surname = "admin":
+    $surname = "admin";
     if($_SESSION["userType"] == "Crew")
     {
       $crew = $entityManager->find("Crew", $_SESSION["user"]);
