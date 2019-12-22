@@ -20,7 +20,7 @@
 		//Script authorisation and data transfer
 		$none = array("RegisterCustomer", "RegisterCrew", "Login", "ChangePassword", "Contact", "Logout");	//ChangePassword is authenticated in situ
 		$customer = array("BookAirsideTransfer", "BookEvent", "BookIFHT", "BookOrganTransfer", "BookTV");
-		$crew = array("VehicleChecklist", "PRF");
+		$crew = array("VehicleChecklist", "PRF", "CheckIn", "CheckOut");
 		$admin = array("UpdateBooking", "AssignCrew", "ActivateCrewAccount");
 		if(in_array($_POST["target"], $customer))
 		{
