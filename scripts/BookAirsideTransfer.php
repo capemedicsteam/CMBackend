@@ -89,4 +89,8 @@
     fclose($file);
   }
   echo($twig->load("action-result.json")->render(["result" => "success"]));
+  //Add info to array for email
+  $data = ["Booking ID" => $bookingAT->getBookingId(), "Flight Type" => $_GET["flightType"], "Flight Date" => $_GET["flightDate"], "Flight Number" => $_GET["flightNumber"], "Departure Airport" => $_GET["flightDepAirport"], "Arrival Airport" => $_GET["flightArrAirport"], "Departure Time" => $_GET["flightDepTime"], "Arrival Time" => $_GET["flightArrTime"], "Patient Name" => $_GET["patName"], "Patient Surname" => $_GET["patSurname"], "Patient ID/Passport Number" => $_GET["patIdPassport"], "Case Reference Number" => $_GET["patCaseRef"], "Ground Ambulance Departure Facility" => $bookingAT->getGroundAmbulanceDepartureFacility, "Ground Ambulance Departure Pickup Time" => $bookingAT->getGroundAmbulanceDepartureFacilityPickupTime(), "Ground Ambulance Arrival Facility" => $bookingAT->getGroundAmbulanceArrivalFacility, "Ground Ambulance Arrival Pickup Time" => $bookingAT->getGroundAmbulanceArrivalAirportPickupTime()];
+  $message = $twig->load("booking.html")->render(["custName" => $customer->getCustomerName(), "custSurname" => $customer->getCustomerSurname(), "custNumber" => $customer->getContactNumber(), "custCompany" => $customer->getCompany(), "custEmail" => $customer->getEmail(), "type" => "Airside Transfer", "data" => $data]);
+  mail($_GET["custEmail"], "Booking Created", $message, "From: noreply@capemedics.co.za");
 ?>

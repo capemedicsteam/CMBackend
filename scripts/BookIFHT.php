@@ -65,4 +65,8 @@
     fclose($file);
   }
   echo($twig->load("action-result.json")->render(["result" => "success"]));
+  //Add info to array for email
+  $data = ["Booking ID" => $bookingIFHT->getBookingId(), "Pickup Facility Type" => $_GET["fromLocationType"], "Pickup Facility Address" => $_GET["fromAddress"], "Pickup Time" => $_GET["fromDateTime"], "Arrival Facility Type" => $_GET["toLocationType"], "Arrival Facility Address" => $_GET["toAddress"], "Arrival Time" => $_GET["toDateTime"], "Patient Name" => $_GET["patName"], "Patient Surname" => $_GET["patSurname"], "Patient ID/Passport Number" => $_GET["patIdPassport"], "Case Reference Number" => $_GET["patCaseRef"], "Patient Nationality" => $_GET["patNationality"], "Return Time" => $bookingIFHT->getReturnTime()];
+  $message = $twig->load("booking.html")->render(["custName" => $customer->getCustomerName(), "custSurname" => $customer->getCustomerSurname(), "custNumber" => $customer->getContactNumber(), "custCompany" => $customer->getCompany(), "custEmail" => $customer->getEmail(), "type" => "Inter Facility/Hospital Transfer", "data" => $data]);
+  mail($_GET["custEmail"], "Booking Created", $message, "From: noreply@capemedics.co.za");
 ?>
