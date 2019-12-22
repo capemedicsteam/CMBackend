@@ -48,5 +48,5 @@
     }
     $count = $count + 1;
   }
-  echo($twig->load("allBookings.json")->render(["bookings" => $output]));
+  echo($twig->load("get-bookings.json")->render(["bookings" => $output]));
 ?>
