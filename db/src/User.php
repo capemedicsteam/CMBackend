@@ -42,7 +42,7 @@ class User
 
     public function isActive()
     {
-      return $this->ACTIVE
+      return $this->ACTIVE;
     }
 
     //Mutators
