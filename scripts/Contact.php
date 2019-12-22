@@ -14,7 +14,7 @@
     echo($twig->load("action-result.json")->render(["result" => "success"]));
     exit();
   }
-  echo($twig->load("action-result.json")->render(["result" => "error_mail"]));
+  echo($twig->load("contact.html")->render(["name" => $_GET["name"], "surname" => $_GET["surname"], "email" => $_GET["email"], "message" => $_GET["message"]]));
 
 
 ?>
