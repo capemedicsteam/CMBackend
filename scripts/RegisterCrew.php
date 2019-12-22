@@ -13,6 +13,7 @@
   }
   //Create Crew
   $crew = new Crew($_GET["name"], $_GET["surname"], Common::toDate($_GET["dob"]), $_GET["email"], $_GET['number'], $_GET["idPassport"], $_GET["address"], $_GET["areaCode"], $_GET["nokName"],  $_GET["nokNumber"], $_GET["race"], $_GET["gender"], $_GET["married"], $_GET["disabled"], $_GET["bankAccountHolderName"], $_GET["bankAccountNumber"], $_GET["bankName"], $_GET["bankBranch"], $_GET["bankBranchCode"], $_GET["taxRef"], $_GET["typeFire"], $_GET["typeSafety"], $_GET["typeMedical"], $_GET["fireCertNumber"], $_GET["hpscaNumber"], $_GET["saioshNumber"], null, null);
+  $crew->setActive(false);
   $entityManager->persist($crew);
   $entityManager->flush();
   //Upload ID

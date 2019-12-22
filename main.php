@@ -21,7 +21,7 @@
 		$none = array("RegisterCustomer", "RegisterCrew", "Login", "ChangePassword", "Contact", "Logout");	//ChangePassword is authenticated in situ
 		$customer = array("BookAirsideTransfer", "BookEvent", "BookIFHT", "BookOrganTransfer", "BookTV");
 		$crew = array("VehicleChecklist", "PRF");
-		$admin = array("UpdateBooking", "AssignCrew");
+		$admin = array("UpdateBooking", "AssignCrew", "ActivateCrewAccount");
 		if(in_array($_POST["target"], $customer))
 		{
 			if($_SESSION["userType"] != "Customer" && substr($POST["target"], 0, 4) != "Book")	//Bookings can be made without logging in
@@ -100,7 +100,7 @@
 		$none = array("JobsForDateRange", "BasicJobInfo");	//JobsForDateRange is authenticated in situ | BasicJobInfo does not require authentication
 		$customer = array("MyBookings");
 		$crew = array();
-		$admin = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport");
+		$admin = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport", "CrewRequests");
 		if(in_array($_POST["target"], $customer))
 		{
 			if($_SESSION["userType"] != "Customer")
@@ -143,60 +143,4 @@
 		header($header);
 		exit();
 	}
-
-	//
-	// if($_POST['request_type'] == "page")	//For users trying to access web pages
-	// {
-	// 	//Web Pages
-	// 	$admin = array("adminpage.html", "assignEmployeesPage.html", "bookingManagementPage.html", "customerManagementPage.html", "documentViewPage.html", "employeeInfoPage.html", "employeeManagementPage.html", "jobInfoPage.html", "jobsManagementPage.html", "reportPage.html")
-	// 	//Check what type of page user is trying to access
-	// 	if(in_array($_POST['target'], $admin))
-	// 	{
-	// 		if($_SESSION['user']) == "admin")
-	// 		{
-	// 			$header = "Location: ".$_GET['target']."?";
-	// 			for($_GET as $key)
-	// 			{
-	// 				if($_GET[$key] != "target" && $_GET[$key] != "request_type")
-	// 				{
-	// 					$header = $header.$key."=".$_GET[$key]."&";
-	// 				}
-	// 			}
-	// 			$header = substr($header, -1);
-	// 			header($header);
-	// 			exit();
-	// 		}
-	// 		else
-	// 		{
-	// 			header("location: Somewhere else");	//Back to sign in page or something
-	// 			exit();
-	// 		}
-	// 	}
-	// }
-	// if($_GET['request_type'] == "script")	//For ajax making a request for data
-	// {
-	// 	//PHP Files
-	// 	$admin = array("adminpage.php", "assignEmployeesPage.php", "bookingManagementPage.php", "customerManagementPage.php", "documentViewPage.php", "employeeInfoPage.php", "employeeManagementPage.php", "jobInfoPage.php", "jobsManagementPage.php", "generateReport.html")
-	// 	//Check if user is authorised to access the data
-	// 	if(in_array($_GET['target'], $admin))
-	// 		if($_SESSION['user']) == "admin")
-	// 		{
-	// 			$header = "Location: ".$_GET['target'];
-	// 			for($_GET as $key)
-	// 			{
-	// 				if($_GET[$key] != "target" && $_GET[$key] != "request_type")
-	// 				{
-	// 					$header = $header."&".$key."=".$_GET[$key];
-	// 				}
-	// 			}
-	// 			header($header);
-	// 			exit();
-	// 		}
-	// 		else
-	// 		{
-	// 			echo("Error 403: Forbidden");
-	// 			exit();
-	// 		}
-	// 	}
-	// }
 ?>

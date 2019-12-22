@@ -15,6 +15,11 @@
     echo($twig->load("action-result.json")->render(["result" => "error_user_not_found"]));
     exit();
   }
+  if(!$user->isActive())
+  {
+    echo($twig->load("action-result.json")->render(["result" => "error_account_inactive"]));
+    exit();
+  }
   if($user->verifyPassword($_GET["password"]))
   {
     $_SESSION["email"] = $user->getEmail();

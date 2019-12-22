@@ -12,6 +12,8 @@ class User
     protected $TYPE;  //Admin, Crew, Customer
     /** @Column(type="integer") **/
     protected $USER_ID;
+    /** @Column(type="boolean") **/
+    protected $ACTIVE;
 
     //Constructor
     public function __construct($email = null, $password = null, $type = null, $user_id = null)
@@ -38,6 +40,11 @@ class User
         return $this->USER_ID;
     }
 
+    public function isActive()
+    {
+      return $this->ACTIVE
+    }
+
     //Mutators
     public function setEmail($email)
     {
@@ -57,6 +64,11 @@ class User
     public function setUserId($id)
     {
         $this->USER_ID = $id;
+    }
+
+    public function setActive($active)
+    {
+      $this->ACTIVE = $active;
     }
 
     //Miscellaneous
