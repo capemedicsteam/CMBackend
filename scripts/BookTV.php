@@ -47,7 +47,7 @@
   }
   if($fileObject != null)
   {
-    $file = fopen("../files/booking_airside_transfer/".$bookingAT.getBookingId().".booking", "w");
+    $file = fopen("../files/booking_airside_transfer/".$bookingTV->getBookingId().".booking", "w");
     if($file == false)
     {
       echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
@@ -58,7 +58,7 @@
   }
   echo($twig->load("action-result.json")->render(["result" => "success"]));
   //Add info to array for email
-  $data = ["Booking ID" => $bookingIFHT->getBookingId(), "Subtype" => $_GET["type"], "Project Name" => $_GET["projectName"], "Date" => $_GET["dateTime"], "Location" => $_GET["location"], "Unit Type" => $_GET["unitType"]];
+  $data = ["Booking ID" => $bookingTV->getBookingId(), "Subtype" => $_GET["type"], "Project Name" => $_GET["projectName"], "Date" => $_GET["dateTime"], "Location" => $_GET["location"], "Unit Type" => $_GET["unitType"]];
   $message = $twig->load("booking.html")->render(["custName" => $customer->getCustomerName(), "custSurname" => $customer->getCustomerSurname(), "custNumber" => $customer->getContactNumber(), "custCompany" => $customer->getCompany(), "custEmail" => $customer->getEmail(), "type" => "TV", "data" => $data]);
   mail($_GET["custEmail"], "Booking Created", $message, "From: noreply@capemedics.co.za");
 ?>

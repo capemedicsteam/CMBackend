@@ -51,7 +51,7 @@
   }
   if($fileObject != null)
   {
-    $file = fopen("../files/booking_airside_transfer/".$bookingAT.getBookingId().".booking", "w");
+    $file = fopen("../files/booking_airside_transfer/".$bookingOT->getBookingId().".booking", "w");
     if($file == false)
     {
       echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
@@ -62,7 +62,7 @@
   }
   echo($twig->load("action-result.json")->render(["result" => "success"]));
   //Add info to array for email
-  $data = ["Booking ID" => $bookingIFHT->getBookingId(), "Airline" => $_GET["airline"], "Plight Number" => $_GET["flightNumber"], "Departure Airport" => $_GET["flightDepAirport"], "Arrival Airport" => $_GET["flightArrAirport"], "Date" => $_GET["flightDate"], "Departure Time" => $_GET["flightDepTime"], "Arrival Time" => $_GET["flightArrTime"]];
+  $data = ["Booking ID" => $bookingOT->getBookingId(), "Airline" => $_GET["airline"], "Plight Number" => $_GET["flightNumber"], "Departure Airport" => $_GET["flightDepAirport"], "Arrival Airport" => $_GET["flightArrAirport"], "Date" => $_GET["flightDate"], "Departure Time" => $_GET["flightDepTime"], "Arrival Time" => $_GET["flightArrTime"]];
   $message = $twig->load("booking.html")->render(["custName" => $customer->getCustomerName(), "custSurname" => $customer->getCustomerSurname(), "custNumber" => $customer->getContactNumber(), "custCompany" => $customer->getCompany(), "custEmail" => $customer->getEmail(), "type" => "Organ Transfer", "data" => $data]);
   mail($_GET["custEmail"], "Booking Created", $message, "From: noreply@capemedics.co.za");
 ?>

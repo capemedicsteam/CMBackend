@@ -107,7 +107,7 @@
   }
   if($fileObject != null)
   {
-    $file = fopen("../files/booking_event/".$bookingAT.getBookingId().".booking", "w");
+    $file = fopen("../files/booking_event/".$bookingEvent->getBookingId().".booking", "w");
     if($file == false)
     {
       echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));

@@ -79,7 +79,7 @@
   }
   if($fileObject != null)
   {
-    $file = fopen("../files/booking_airside_transfer/".$bookingAT.getBookingId().".booking", "w");
+    $file = fopen("../files/booking_airside_transfer/".$bookingAT->getBookingId().".booking", "w");
     if($file == false)
     {
       echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
