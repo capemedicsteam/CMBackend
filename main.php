@@ -22,9 +22,10 @@
 		$customer = array("BookAirsideTransfer", "BookEvent", "BookIFHT", "BookOrganTransfer", "BookTV");
 		$crew = array("VehicleChecklist", "PRF", "CheckIn", "CheckOut");
 		$admin = array("UpdateBooking", "AssignCrew", "ActivateCrewAccount");
+		$target = $_POST["target"];	//For substr to work
 		if(in_array($_POST["target"], $customer))
 		{
-			if($_SESSION["userType"] != "Customer" && substr($POST["target"], 0, 4) != "Book")	//Bookings can be made without logging in
+			if($_SESSION["userType"] != "Customer" && substr($target, 0, 4) != "Book")	//Bookings can be made without logging in
 			{
 				echo($twig->load("action-result.json")->render(["result" => "error_unauthorised"]));
 				exit();
