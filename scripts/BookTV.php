@@ -45,7 +45,7 @@
         $fileObject[$key] = $value;
     }
   }
-  if(isset($fileObject != null))
+  if($fileObject != null)
   {
     $file = fopen("../files/booking_airside_transfer/".$bookingAT.getBookingId().".booking", "w");
     if($file == false)
