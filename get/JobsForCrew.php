@@ -14,7 +14,7 @@
   $jobAssignments = $entityManager->getRepository("CrewAssignment")->findBy(["CREW_ID" => $_GET["id"]]);
   $count = 0;
   $output = array();
-  foreach($jobAssignment as $assignment)
+  foreach($jobAssignments as $assignment)
   {
     $job = $entityManager->find("Job", $assignment->getJobId());
     $booking = $entityManager->find("Booking", $job->getBookingId());
