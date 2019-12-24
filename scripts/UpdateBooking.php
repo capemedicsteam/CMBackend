@@ -127,24 +127,29 @@
               if($fileObjectUpdate != null) //Only if there are other parameters
               {
                 $file = fopen("../files/booking_airside_transfer/".$booking->getBookingId().".booking", "r");
-                if($file == "false")  //If file doesn't exist
+                if($file == false)  //If file doesn't exist
                 {
                   $file = fopen("../files/booking_airside_transfer/".$booking->getBookingId().".booking", "w");
-                  if($file == "false")
+                  if($file == false)
                   {
                     echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
                     exit();
                   }
-                  fwrite($file)->serialize($fileObjectUpdate);
+                  fwrite($file, serialize($fileObjectUpdate));
                 }
                 else  //If file already exists
                 {
-                  $fileObject = unserialize($fread($file, filesize($file)));
+                  $length = filesize("../files/booking_airside_transfer/".$booking->getBookingId().".booking");
+                  if($length <= 0)
+                  {
+                    $length = 1;
+                  }
+                  $fileObject = unserialize(fread($file, $length));
                   foreach($fileObjectUpdate as $key => $value)
                   {
                     $fileObject[$key] = $value;
                   }
-                  fwrite($file)->serialize($fileObject);
+                  fwrite($file, serialize($fileObject));
                 }
                 fclose($file);
               }
@@ -240,24 +245,29 @@
               if($fileObjectUpdate != null) //Only if there are other parameters
               {
                 $file = fopen("../files/booking_event/".$booking->getBookingId().".booking", "r");
-                if($file == "false")  //If file doesn't exist
+                if($file == false)  //If file doesn't exist
                 {
                   $file = fopen("../files/booking_event/".$booking->getBookingId().".booking", "w");
-                  if($file == "false")
+                  if($file == false)
                   {
                     echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
                     exit();
                   }
-                  fwrite($file)->serialize($fileObjectUpdate);
+                  fwrite($file, serialize($fileObjectUpdate));
                 }
                 else  //If file already exists
                 {
-                  $fileObject = unserialize($fread($file, filesize($file)));
+                  $length = filesize("../files/booking_event/".$booking->getBookingId().".booking");
+                  if($length <= 0)
+                  {
+                    $length = 1;
+                  }
+                  $fileObject = unserialize(fread($file, $length));
                   foreach($fileObjectUpdate as $key => $value)
                   {
                     $fileObject[$key] = $value;
                   }
-                  fwrite($file)->serialize($fileObject);
+                  fwrite($file, serialize($fileObject));
                 }
                 fclose($file);
               }
@@ -333,24 +343,29 @@
               if($fileObjectUpdate != null) //Only if there are other parameters
               {
                 $file = fopen("../files/booking_ifht/".$booking->getBookingId().".booking", "r");
-                if($file == "false")  //If file doesn't exist
+                if($file == false)  //If file doesn't exist
                 {
                   $file = fopen("../files/booking_ifht/".$booking->getBookingId().".booking", "w");
-                  if($file == "false")
+                  if($file == false)
                   {
                     echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
                     exit();
                   }
-                  fwrite($file)->serialize($fileObjectUpdate);
+                  fwrite($file, serialize($fileObjectUpdate));
                 }
                 else  //If file already exists
                 {
-                  $fileObject = unserialize($fread($file, filesize($file)));
+                  $length = filesize("../files/booking_ifht/".$booking->getBookingId().".booking");
+                  if($length <= 0)
+                  {
+                    $length = 1;
+                  }
+                  $fileObject = unserialize(fread($file, $length));
                   foreach($fileObjectUpdate as $key => $value)
                   {
                     $fileObject[$key] = $value;
                   }
-                  fwrite($file)->serialize($fileObject);
+                  fwrite($file, serialize($fileObject));
                 }
                 fclose($file);
               }
@@ -402,24 +417,29 @@
               if($fileObjectUpdate != null) //Only if there are other parameters
               {
                 $file = fopen("../files/booking_organ_transfer/".$booking->getBookingId().".booking", "r");
-                if($file == "false")  //If file doesn't exist
+                if($file == false)  //If file doesn't exist
                 {
                   $file = fopen("../files/booking_organ_transfer/".$booking->getBookingId().".booking", "w");
-                  if($file == "false")
+                  if($file == false)
                   {
                     echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
                     exit();
                   }
-                  fwrite($file)->serialize($fileObjectUpdate);
+                  fwrite($file, serialize($fileObjectUpdate));
                 }
                 else  //If file already exists
                 {
-                  $fileObject = unserialize($fread($file, filesize($file)));
+                  $length = filesize("../files/booking_organ_transfer/".$booking->getBookingId().".booking");
+                  if($length <= 0)
+                  {
+                    $length = 1;
+                  }
+                  $fileObject = unserialize(fread($file, $length));
                   foreach($fileObjectUpdate as $key => $value)
                   {
                     $fileObject[$key] = $value;
                   }
-                  fwrite($file)->serialize($fileObject);
+                  fwrite($file, serialize($fileObject));
                 }
                 fclose($file);
               }
@@ -459,24 +479,29 @@
               if($fileObjectUpdate != null) //Only if there are other parameters
               {
                 $file = fopen("../files/booking_tv/".$booking->getBookingId().".booking", "r");
-                if($file == "false")  //If file doesn't exist
+                if($file == false)  //If file doesn't exist
                 {
                   $file = fopen("../files/booking_tv/".$booking->getBookingId().".booking", "w");
-                  if($file == "false")
+                  if($file == false)
                   {
                     echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
                     exit();
                   }
-                  fwrite($file)->serialize($fileObjectUpdate);
+                  fwrite($file, serialize($fileObjectUpdate));
                 }
                 else  //If file already exists
                 {
-                  $fileObject = unserialize($fread($file, filesize($file)));
+                  $length = filesize("../files/booking_tv/".$booking->getBookingId().".booking");
+                  if($length <= 0)
+                  {
+                    $length = 1;
+                  }
+                  $fileObject = unserialize(fread($file, $length));
                   foreach($fileObjectUpdate as $key => $value)
                   {
                     $fileObject[$key] = $value;
                   }
-                  fwrite($file)->serialize($fileObject);
+                  fwrite($file, serialize($fileObject));
                 }
                 fclose($file);
               }
