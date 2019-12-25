@@ -6,7 +6,6 @@
                         "number": "{{member.number}}",
                         "email": "{{member.email}}",
                         "qualification": "{{member.qualification}}"
-                    }
   }{%if not loop.last%},{%endif%}
   {%endfor%}
 }
