@@ -37,5 +37,16 @@
       $dateDec->modify("-1 day");
       return $dateDec;
     }
+
+    public static randomString($length)
+    {
+      $characters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890`~!@#$%^&*()_+-=[]{}\|;:,<.>/?";
+      $password = "";
+      for($i = 0 ; $i < $length ; $i++)
+      {
+        $password = $password.$characters[rand(0,strlen($characters))];
+      }
+      return $password;
+    }
   }
 ?>
