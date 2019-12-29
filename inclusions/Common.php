@@ -38,7 +38,7 @@
       return $dateDec;
     }
 
-    public static randomString($length)
+    public static function randomString($length)
     {
       $characters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890`~!@#$%^&*()_+-=[]{}\|;:,<.>/?";
       $password = "";
