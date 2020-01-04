@@ -5,7 +5,7 @@
   require_once "../db/db-connection.php";
   require_once "../inclusions/ConfigureTwig.php";
   require_once "../inclusions/Common.php";
-  $users = $entityManager->getRepository("User")->findBy(["ACTIVE" => "0"]);
+  $users = $entityManager->getRepository("User")->findBy(["TYPE" => "Crew", "ACTIVE" => "0"]);
   $count = 0;
   foreach($users as $user)
   {
