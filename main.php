@@ -21,7 +21,7 @@
 		$none = array("RegisterCustomer", "RegisterCrew", "Login", "ChangePassword", "ResetPassword", "Contact", "Logout");	//ChangePassword is authenticated in situ
 		$customer = array("BookAirsideTransfer", "BookEvent", "BookIFHT", "BookOrganTransfer", "BookTV");
 		$crew = array("VehicleChecklist", "PRF", "CheckIn", "CheckOut");
-		$admin = array("UpdateBooking", "AssignCrew", "ActivateCrewAccount");
+		$admin = array("UpdateBooking", "AssignCrew", "ActivateAccount");
 		$target = $_POST["target"];	//For substr to work
 		if(in_array($_POST["target"], $customer))
 		{
@@ -98,10 +98,10 @@
 	if($_POST['request_type'] == "get")
 	{
 		//Script authorisation and data transfer
-		$none = array("JobsForDateRange", "BasicJobInfo");	//JobsForDateRange is authenticated in situ | BasicJobInfo does not require authentication
+		$none = array("JobsForDateRange", "BasicJobInfo", "Booking");	//JobsForDateRange, Booking is authenticated in situ | BasicJobInfo does not require authentication
 		$customer = array("MyBookings");
 		$crew = array("JobsForCrew");
-		$admin = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport", "CrewRequests");
+		$admin = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport", "CrewRequests", "CustomerRequests");
 		if(in_array($_POST["target"], $customer))
 		{
 			if($_SESSION["userType"] != "Customer")

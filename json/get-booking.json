@@ -1,0 +1,23 @@
+{
+  "id": "{{id}}",
+  "custName": "{{custName}}",
+  "custSurname": "{{custSurname}}",
+  "custNumber": "{{custNumber}}",
+  "custEmail": "{{custEmail}}",
+  "custCompany": "{{custCompany}}",
+  "proposedDate": "{{proposedDate}}",
+  "type": "{{type}}",
+  "confirmed": "{{crewRequired}}",
+  "account": "{{account}}",
+  "details": {
+                      {%for key, value in details%}
+                        "{{key}}": "{{value}}"{%if not loop.last%},{%endif%}
+                      {%endfor%}
+                    }
+  "additionalData": {
+                      {%for key, value in additionalData%}
+                        "{{key}}": "{{value}}"{%if not loop.last%},{%endif%}
+                      {%endfor%}
+
+                      }
+}
