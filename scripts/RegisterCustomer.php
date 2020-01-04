@@ -14,13 +14,14 @@
   $entityManager->persist($customer);
   $entityManager->flush();
   //Check if email address has already been used
-  if($entityManager->find("Customer", $_GET["email"]))
+  if($entityManager->find("User", $_GET["email"]) != null)
   {
     echo($twig->load("action-result.json")->render(["result" => "error_duplicate_email"]));
     exit();
   }
   //Create user
   $user = new User($_GET['email'], $_GET['password'], "Customer", $customer->getCustomerId());
+  $user->setActive(false);
   $entityManager->persist($user);
   $entityManager->flush();
   //Return result
