@@ -174,7 +174,7 @@ class BookingAirsideTransfer
 
     public function getAdditionalData()
     {
-        $filename = "../../data/airside_transfer/".$this->BOOKING_ID.".txt";
+        $filename = "../../files/booking_airside_transfer/".$this->BOOKING_ID.".booking";
         if(file_exists($filename))
         {
           $handle = fopen($filename, "r");
@@ -293,21 +293,21 @@ class BookingAirsideTransfer
 
     public function setAdditionalData($data)
     {
-      $handle = fopen("../../data/airside_transfer/".$this->BOOKING_ID.".txt", "w");
+      $handle = fopen("../../files/booking_airside_transfer/".$this->BOOKING_ID.".booking", "w");
       fwrite($handle, $data);
       fclose($handle);
     }
 
     public function appendAdditionalData($data)
     {
-      $handle = fopen("../../data/airside_transfer/".$this->BOOKING_ID.".txt", "a");
+      $handle = fopen("../../files/booking_airside_transfer/".$this->BOOKING_ID.".booking", "a");
       fwrite($handle, $data);
       fclose($handle);
     }
 
     public function deleteAdditionalData()
     {
-      unlink("../../data/airside_transfer/".$this->BOOKING_ID.".txt");
+      unlink("../../files/booking_airside_transfer/".$this->BOOKING_ID.".booking");
     }
 }
 ?>
