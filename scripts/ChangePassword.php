@@ -17,7 +17,7 @@
     exit();
   }
   $user = $entityManager->find("User", $_SESSION["email"]);
-  if(!user->verifyPassword($_GET["password"]))
+  if(!$user->verifyPassword($_GET["password"]))
   {
     echo($twig->load("action-result.json")->render(["result" => "error_password_incorrect"]));
     exit();

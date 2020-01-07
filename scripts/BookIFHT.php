@@ -32,7 +32,7 @@
   $entityManager->persist($booking);
   $entityManager->flush();
   //Create IFHT
-  $bookingIFHT = new BookingIFHT($booking->getBookingId(), $_GET["longDistance"], $_GET["fromLocationType"], $_GET["fromAddress"], Common::toDateTime($_GET["fromDateTime"]), $_GET["toLocationType"], $_GET["toAddress"], Common::toDateTime($_GET["toDateTime"], null, null, $_GET["patName"], $_GET["patSurname"], $_GET["patIdPassport"], $_GET["patCaseRef"], $_GET["patNationality"]);
+  $bookingIFHT = new BookingIFHT($booking->getBookingId(), $_GET["longDistance"], $_GET["fromLocationType"], $_GET["fromAddress"], Common::toDateTime($_GET["fromDateTime"]), $_GET["toLocationType"], $_GET["toAddress"], Common::toDateTime($_GET["toDateTime"]), null, null, $_GET["patName"], $_GET["patSurname"], $_GET["patIdPassport"], $_GET["patCaseRef"], $_GET["patNationality"]);
   if(isset($_GET["returnTrip"]))
   {
     $bookingIFHT.setReturnTrip($_GET["returnTrip"]);
@@ -68,5 +68,5 @@
   //Add info to array for email
   $data = ["Booking ID" => $bookingIFHT->getBookingId(), "Pickup Facility Type" => $_GET["fromLocationType"], "Pickup Facility Address" => $_GET["fromAddress"], "Pickup Time" => $_GET["fromDateTime"], "Arrival Facility Type" => $_GET["toLocationType"], "Arrival Facility Address" => $_GET["toAddress"], "Arrival Time" => $_GET["toDateTime"], "Patient Name" => $_GET["patName"], "Patient Surname" => $_GET["patSurname"], "Patient ID/Passport Number" => $_GET["patIdPassport"], "Case Reference Number" => $_GET["patCaseRef"], "Patient Nationality" => $_GET["patNationality"], "Return Time" => $bookingIFHT->getReturnTime()];
   $message = $twig->load("booking.html")->render(["custName" => $customer->getCustomerName(), "custSurname" => $customer->getCustomerSurname(), "custNumber" => $customer->getContactNumber(), "custCompany" => $customer->getCompany(), "custEmail" => $customer->getEmail(), "type" => "Inter Facility/Hospital Transfer", "data" => $data]);
-  mail($_GET["custEmail"], "Booking Created", $message, "From: noreply@capemedics.co.za");
+  mail($customer->getEmail(), "Booking Created", $message, "From: noreply@capemedics.co.za");
 ?>
