@@ -90,7 +90,7 @@
 				}
 				$filenames[0] = $documentFilename;
 			}
-			$_SESSION[$key] = $filenames;
+			$header = $header."&".$key."=".serialize($filenames);
 		}
 		header($header);
 		exit();

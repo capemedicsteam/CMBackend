@@ -6,7 +6,7 @@
   require_once "../inclusions/ConfigureTwig.php";
   require_once "../inclusions/Common.php";
   //Check if all required data is present
-  if(!isset($_GET['name']) || !isset($_GET['surname']) || !isset($_GET['dob']) || !isset($_GET["email"]) || !isset($_GET['number']) || !isset($_GET['idPassport']) || !isset($_GET['address']) || !isset($_GET['areaCode']) || !isset($_GET['nokName']) || !isset($_GET['nokNumber']) || !isset($_GET['race']) || !isset($_GET['gender']) || !isset($_GET['married']) || !isset($_GET['disabled']) || !isset($_GET['bankAccountHolderName']) || !isset($_GET['bankAccountNumber']) || !isset($_GET['bankName']) || !isset($_GET['bankBranch']) || !isset($_GET['bankBranchCode']) || !isset($_GET['taxRef']) || !isset($_GET['typeFire']) || !isset($_GET['typeSafety']) || !isset($_GET['typeMedical']) || !isset($_GET['fireCertNumber']) || !isset($_GET['hpscaNumber']) || !isset($_GET['saioshNumber']) || !isset($_SESSION['idFile']) || !isset($_GET['password']))
+  if(!isset($_GET['name']) || !isset($_GET['surname']) || !isset($_GET['dob']) || !isset($_GET["email"]) || !isset($_GET['number']) || !isset($_GET['idPassport']) || !isset($_GET['address']) || !isset($_GET['areaCode']) || !isset($_GET['nokName']) || !isset($_GET['nokNumber']) || !isset($_GET['race']) || !isset($_GET['gender']) || !isset($_GET['married']) || !isset($_GET['disabled']) || !isset($_GET['bankAccountHolderName']) || !isset($_GET['bankAccountNumber']) || !isset($_GET['bankName']) || !isset($_GET['bankBranch']) || !isset($_GET['bankBranchCode']) || !isset($_GET['taxRef']) || !isset($_GET['typeFire']) || !isset($_GET['typeSafety']) || !isset($_GET['typeMedical']) || !isset($_GET['fireCertNumber']) || !isset($_GET['hpscaNumber']) || !isset($_GET['saioshNumber']) || !isset($_GET['idFile']) || !isset($_GET['password']))
   {
     echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
     exit();
@@ -16,29 +16,30 @@
   $entityManager->persist($crew);
   $entityManager->flush();
   //Upload ID
-  $idFileName = $crew->getCrewId()."_".$_SESSION["idFile"][0];
+  $idFile = unserialize($_GET["idFile"])[0];
+  $idFileName = $crew->getCrewId()."_".$idFile;
   $crew->setIdFilepath($idFileName);
-  if(!copy("../files/temp/".$_SESSION["idFile"][0], "../files/crew/".$idFileName))
+  if(!copy("../files/temp/".$idFile, "../files/crew/".$idFileName))
   {
     echo($twig->load("action-result.json")->render(["result" => "error_file"]));
     exit();
   }
-  unlink("../files/temp/".$_SESSION["idFile"][0]);
+  unlink("../files/temp/".$idFile);
   //Upload other documents (if required)
-  if(isset($_SESSION["documentFiles"]))
+  if(isset($_GET["documentFiles"]))
   {
-    $documentFilenames = $_SESSION["documentFiles"];
-    $count = count($documentFilenames);
+    $documentFiles = unserialize($_GET["documentFiles"]);
+    $count = count($documentFiles);
     for($i = 0 ; $i < $count ; $i++)
     {
-      $documentFilename = $crew->getCrewId()."_".$documentFilenames[$i];
+      $documentFilename = $crew->getCrewId()."_".$documentFiles[$i];
       $documentFilenames[$i] = $documentFilename;
-      if(!copy("../files/temp/".$_SESSION["documentFiles"][$i], "../files/crew/".$documentFilename))
+      if(!copy("../files/temp/".$documentFiles[$i], "../files/crew/".$documentFilename))
       {
         echo($twig->load("action-result.json")->render(["result" => "error_file"]));
         exit();
       }
-      unlink("../files/temp/".$_SESSION["documentFiles"][$i]);
+      unlink("../files/temp/".$documentFiles[$i]);
     }
     $crew->setDocumentFilepaths(serialize($documentFilenames));
   }
