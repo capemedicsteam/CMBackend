@@ -801,6 +801,8 @@
                         Vehicle Checklist Errors
                       </h2>
                       <div style="text-align: left; margin-top: 50px">
+                        <p><strong>Ambulance Type: </strong> {{ambulanceType}}</p>
+                        <p><strong>Vehicle Type: </strong> {{vehicleType}}</p>
                         <p><strong>Vehicle Number: </strong> {{vehicleNumber}}</p>
                         <p><strong>Driver: </strong> {{driver}}</p>
                         <p>
@@ -819,19 +821,24 @@
                     </div>
                   </td>
                 </tr>
-                
+
                 <tr>
                   <td>
                     <div
                       class="text"
                       style="padding: 0 4em; text-align: center; color: #000;"
                     >
-                    {%for error, values in checklist%}
-                      <div style="text-align: left; margin-top: 50px">
-                        <p><strong>Item: </strong> {{error}}</p>
-                        <p><strong>Comment: </strong> {{values.comment}}</p>
-                      </div>
+                    {%for category, data in checklist%}
+                    <h3 style="text-align: left">{{category}}</h3>
+                      {%for error, values in data%}
+                        <div style="text-align: left; margin-top: 50px">
+                          <p><strong>Item: </strong> {{error}}</p>
+                          <p><strong>Quantity: </strong> {{values.QTY}}</p>
+                          <p><strong>Checked: </strong> {{values.CHECKED}}</p>
+                          <p><strong>Comment: </strong> {{values.COMMENT}}</p>
+                        </div>
                       {%endfor%}
+                    {%endfor%}
                     </div>
                   </td>
                 </tr>
