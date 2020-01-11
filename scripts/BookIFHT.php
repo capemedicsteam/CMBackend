@@ -28,18 +28,18 @@
     $entityManager->flush();
   }
   //Create booking
-  $booking = new Booking($customer, Common::toDate($_GET["date"]), "t");
+  $booking = new Booking($customer, Common::toDateTime($_GET["fromDateTime"]), "t");
   $entityManager->persist($booking);
   $entityManager->flush();
   //Create IFHT
   $bookingIFHT = new BookingIFHT($booking->getBookingId(), $_GET["longDistance"], $_GET["fromLocationType"], $_GET["fromAddress"], Common::toDateTime($_GET["fromDateTime"]), $_GET["toLocationType"], $_GET["toAddress"], Common::toDateTime($_GET["toDateTime"]), null, null, $_GET["patName"], $_GET["patSurname"], $_GET["patIdPassport"], $_GET["patCaseRef"], $_GET["patNationality"]);
   if(isset($_GET["returnTrip"]))
   {
-    $bookingIFHT.setReturnTrip($_GET["returnTrip"]);
+    $bookingIFHT->setReturnTrip($_GET["returnTrip"]);
   }
   if(isset($_GET["returnTime"]))
   {
-    $bookingIFHT.setReturnTime(Common::toTime($_GET["returnTime"]));
+    $bookingIFHT->setReturnTime(Common::toTime($_GET["returnTime"]));
   }
   $entityManager->persist($bookingIFHT);
   $entityManager->flush();
