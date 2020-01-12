@@ -96,7 +96,7 @@
   $entityManager->persist($bookingEvent);
   $entityManager->flush();
   //Data to be written to file
-  $exclusions = array("eventType", "eventStartDateTime", "eventEndDateTime", "location", "eventName", "pax", "description", "buRequired", "buStartDateTime", "buEndDateTime", "strikeRequired", "strikeStartDateTime", "strikeEndDateTime", "eventNature", "attendeesSSB", "expectedNumbers", "toy", "venue", "attendeesType", "eventDuration");
+  $exclusions = array("eventType", "eventStartDateTime", "eventEndDateTime", "location", "eventName", "pax", "description", "buRequired", "buStartDateTime", "buEndDateTime", "strikeRequired", "strikeStartDateTime", "strikeEndDateTime", "eventNature", "attendeesSSB", "expectedNumbers", "toy", "venue", "attendeesType", "eventDuration", "custName", "custSurname", "custNumber", "custCompany", "custEmail");
   $fileObject;
   foreach($_GET as $key => $value)
   {

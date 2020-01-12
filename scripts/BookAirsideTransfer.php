@@ -68,7 +68,7 @@
   $entityManager->persist($bookingAT);
   $entityManager->flush();
   //Data to be written to file
-  $exclusions = array("flightType", "flightDate", "flightNumber", "flightDepAirport", "flightArrAirport", "flightDepTime", "flightArrTime", "flightTerminalType", "careLevel", "patName", "patSurname", "patIdPassport", "patCaseRef", "account", "flightEscortRequired", "ambulanceEscortRequired", "longDistance", "ambulanceDepFacility", "ambulanceDepFacilityTime", "ambulanceArrFaciliy", "ambulanceArrFacilityTime");
+  $exclusions = array("flightType", "flightDate", "flightNumber", "flightDepAirport", "flightArrAirport", "flightDepTime", "flightArrTime", "flightTerminalType", "careLevel", "patName", "patSurname", "patIdPassport", "patCaseRef", "account", "flightEscortRequired", "ambulanceEscortRequired", "longDistance", "ambulanceDepFacility", "ambulanceDepFacilityTime", "ambulanceArrFaciliy", "ambulanceArrFacilityTime", "custName", "custSurname", "custNumber", "custCompany", "custEmail");
   $fileObject;
   foreach($_GET as $key => $value)
   {

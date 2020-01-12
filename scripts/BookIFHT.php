@@ -44,7 +44,7 @@
   $entityManager->persist($bookingIFHT);
   $entityManager->flush();
   //Data to be written to file
-  $exclusions = array("longDistance", "fromLocationType", "fromAddress", "fromDateTime", "toLocationType", "toAddress", "toDateTime", "patName", "patSurname", "patIdPassport", "patCaseRef", "patNationality", "returnTrip", "returnTime");
+  $exclusions = array("longDistance", "fromLocationType", "fromAddress", "fromDateTime", "toLocationType", "toAddress", "toDateTime", "patName", "patSurname", "patIdPassport", "patCaseRef", "patNationality", "returnTrip", "returnTime", "custName", "custSurname", "custNumber", "custCompany", "custEmail");
   $fileObject;
   foreach($_GET as $key => $value)
   {

@@ -36,7 +36,7 @@
   $entityManager->persist($bookingTV);
   $entityManager->flush();
   //Data to be written to file
-  $exclusions = array("type", "projectName", "dateTime", "location", "unitType");
+  $exclusions = array("type", "projectName", "dateTime", "location", "unitType", "custName", "custSurname", "custNumber", "custCompany", "custEmail");
   $fileObject;
   foreach($_GET as $key => $value)
   {
