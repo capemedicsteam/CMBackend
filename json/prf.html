@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <style>
+      table
+      {
+        width: 100%;
+      }
+      td
+      {
+        border: solid;
+        border-width: thin;
+        text-align: center;
+      }
+      #header
+      {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Patient Report Form</h1>
+    <br>
+    {%for category, data in form%}
+      <h3>{{category}}</h3>
+      <div>
+        {%for field, value in data%}
+          <p><strong>{{field}}: </strong>{{value}}</p>
+        {%endfor%}
+      </div>
+      <br>
+    {%endfor%}
+  </body>
+</html>

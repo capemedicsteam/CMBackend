@@ -20,7 +20,7 @@
 		//Script authorisation and data transfer
 		$none = array("RegisterCustomer", "RegisterCrew", "Login", "ChangePassword", "ResetPassword", "Contact", "Logout");	//ChangePassword is authenticated in situ
 		$customer = array("BookAirsideTransfer", "BookEvent", "BookIFHT", "BookOrganTransfer", "BookTV");
-		$crew = array("VehicleChecklistAmbulance", "VehicleChecklistFire" "MedicalForm", "CheckIn", "CheckOut");
+		$crew = array("VehicleChecklistAmbulance", "VehicleChecklistFire", "MedicalForm", "CheckIn", "CheckOut");
 		$admin = array("UpdateBooking", "AssignCrew", "ActivateAccount");
 		$target = $_POST["target"];	//For substr to work
 		if(in_array($_POST["target"], $customer))
@@ -90,7 +90,7 @@
 				}
 				$filenames[0] = $documentFilename;
 			}
-			$header = $header."&".$key."=".serialize($filenames);
+			$header = $header."&".$key."=\"".serialize($filenames)."\"";
 		}
 		header($header);
 		exit();
@@ -101,7 +101,7 @@
 		$none = array("JobsForDateRange", "BasicJobInfo", "Booking");	//JobsForDateRange, Booking is authenticated in situ | BasicJobInfo does not require authentication
 		$customer = array("MyBookings");
 		$crew = array("JobsForCrew");
-		$admin = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport", "CrewRequests", "CustomerRequests", "CrewMember", "CrewFile");
+		$admin = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport", "CrewRequests", "CustomerRequests", "CrewMember", "CrewFile", "PRF");
 		if(in_array($_POST["target"], $customer))
 		{
 			if($_SESSION["userType"] != "Customer")
