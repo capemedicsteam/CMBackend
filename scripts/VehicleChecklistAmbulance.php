@@ -22,7 +22,7 @@
     echo($twig->load("action-result.json")->render(["result" => "success"]));
     exit();
   }
-  $message = $twig->load("VehicleChecklistAmbulance.html")->render(["ambulanceType" => $_GET["ambulanceType"], "vehicleType" => $_GET["vehicleType"], "vehicleNumber" => $_GET["vehicleNumber"], "driver" => $_GET["driver"], "controller" => $_GET["controller"], "checkedBy" => $_GET["checkedBy"], "date" => $_GET["date"], "time" => $_GET["time"], "checklist" => json_decode($_GET["checklist"])]);
+  $message = $twig->load("vehicleChecklistAmbulance.html")->render(["ambulanceType" => $_GET["ambulanceType"], "vehicleType" => $_GET["vehicleType"], "vehicleNumber" => $_GET["vehicleNumber"], "driver" => $_GET["driver"], "controller" => $_GET["controller"], "checkedBy" => $_GET["checkedBy"], "date" => $_GET["date"], "time" => $_GET["time"], "checklist" => json_decode($_GET["checklist"])]);
   $headers = "From: noreply@capemedics.co.za\r\nContent-type: text/html;charset=UTF-8";
   mail("dillondiegopillay@gmail.com", "Vehicle Checklist Alert", $message, $headers);
   echo($twig->load("action-result.json")->render(["result" => "success"]));

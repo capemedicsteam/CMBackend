@@ -6,7 +6,7 @@
   require_once "../inclusions/ConfigureTwig.php";
   require_once "../inclusions/Common.php";
   //Check if all required data is present -need type value comment in values
-  if(!isset($_GET["licenceExpiryDate"]) || !isset($_GET["driver"]) || !isset($_GET["date"]) || !isset($_GET["time"]) || !isset($_GET["skid"]) || !isset($_GET["mileage"]) || !isset($_GET["fuel"]) || !isset($_GET["oils"]) || $_GET["reg"] || $_GET["location"] || $_GET["production"] || $_GET["crew"])
+  if(!isset($_GET["licenceExpiryDate"]) || !isset($_GET["driver"]) || !isset($_GET["date"]) || !isset($_GET["time"]) || !isset($_GET["skid"]) || !isset($_GET["mileage"]) || !isset($_GET["fuel"]) || !isset($_GET["oils"]) || !isset($_GET["reg"]) || !isset($_GET["location"]) || !isset($_GET["production"]) || !isset($_GET["crew"]))
   {
     echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
     exit();
