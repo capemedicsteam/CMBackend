@@ -12,14 +12,14 @@
     exit();
   }
   //Check for required patient data
-  $data = json_decode($_GET["medicalForm"]);
+  $data = json_decode($_GET["medicalForm"], true);
   if(!isset($data["Patient Details"]["ID"]) || !isset($data["Patient Details"]["Full_name"]) || !isset($data["Patient Details"]["Surname"]))
   {
     echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
     exit();
   }
   //Save File
-  $file = fopen("../files/prf/".$_GET["jobId"]."_".$data["Patient Details"]["ID"]."_".$data["Patient Details"]["Full_name"]." ".$data["Patient Details"]["Surname"], "w");
+  $file = fopen("../files/prf/".$_GET["jobId"]."_".$data["Patient Details"]["ID"]."_".$data["Patient Details"]["Full_name"]." ".$data["Patient Details"]["Surname"].".prf", "w");
   if($file == false)
   {
     echo($twig->load("action-result.json")->render(["result" => "error_additional_data"]));
