@@ -101,7 +101,7 @@
 		$none = array("JobsForDateRange", "BasicJobInfo", "Booking");	//JobsForDateRange, Booking is authenticated in situ | BasicJobInfo does not require authentication
 		$customer = array("MyBookings");
 		$crew = array("JobsForCrew");
-		$admin = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport", "CrewRequests", "CustomerRequests", "CrewMember", "CrewFile", "PRF");
+		$admin = array("Bookings", "Customers", "Crew", "Jobs", "TimeSheetReport", "CheckIns", "CrewRequests", "CustomerRequests", "CrewMember", "CrewFile", "PRF");
 		if(in_array($_POST["target"], $customer))
 		{
 			if($_SESSION["userType"] != "Customer")

@@ -1,0 +1,14 @@
+{
+  {%for checkIn in checkIns%}
+  "{{checkIn.id}}" : {
+                        "crewId": "{{checkIn.crewId}}",
+                        "crewName": "{{checkIn.crewName}}",
+                        "crewSurname": "{{checkIn.crewSurname}}",
+                        "jobId": "{{checkIn.jobId}}",
+                        "location": "{{checkIn.location}}",
+                        "date": "{{checkIn.date}}",
+                        "timeIn": "{{checkIn.timeIn}}",
+                        "timeOut": "{{checkIn.timeOut}}"
+  }{%if not loop.last%},{%endif%}
+  {%endfor%}
+}
