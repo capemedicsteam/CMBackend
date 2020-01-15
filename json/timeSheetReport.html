@@ -23,7 +23,8 @@
     <h3>Range: {{startDate}} - {{endDate}}</h3>
     <table cellspacing=0>
       <tr id="header">
-        <td>Id</td>
+        <td>Job ID</td>
+        <td>Location</td>
         <td>Date</td>
         <td>Time In</td>
         <td>Time Out</td>
@@ -31,6 +32,7 @@
       {%for checkIn in checkIns%}
         <tr>
           <td>{{checkIn.id}}</td>
+          <td>{{checkIn.location}}</td>
           <td>{{checkIn.date}}</td>
           <td>{{checkIn.timeIn}}</td>
           <td>{{checkIn.timeOut}}</td>
