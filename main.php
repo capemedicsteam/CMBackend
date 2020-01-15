@@ -58,7 +58,7 @@
 		{
 			if($key != "target" && $key != "request_type")
 			{
-				$header = $header.$key."=".$value."&";
+				$header = $header.$key."=".str_replace(array("\n", "\r"), " ", $value)."&";
 			}
 		}
 		$header = substr($header, 0, -1);
@@ -90,7 +90,7 @@
 				}
 				$filenames[0] = $documentFilename;
 			}
-			$header = $header."&".$key."=\"".serialize($filenames)."\"";
+			$header = $header."&".$key."=".serialize($filenames);
 		}
 		header($header);
 		exit();
@@ -137,7 +137,7 @@
 		{
 			if($key != "target" && $key != "request_type")
 			{
-				$header = $header.$key."=".$value."&";
+				$header = $header.$key."=".str_replace(array("\n", "\r"), " ", $value)."&";
 			}
 		}
 		$header = substr($header, 0, -1);
