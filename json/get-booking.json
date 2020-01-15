@@ -13,7 +13,7 @@
                       {%for key, value in details%}
                         "{{key}}": "{{value}}"{%if not loop.last%},{%endif%}
                       {%endfor%}
-                    }
+                    },
   "additionalData": {
                       {%for key, value in additionalData%}
                         "{{key}}": "{{value}}"{%if not loop.last%},{%endif%}
