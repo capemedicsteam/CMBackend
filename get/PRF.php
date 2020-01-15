@@ -59,6 +59,6 @@
     $dompdf->loadHtml($twig->load("prf.html")->render(["form" => $data]));
     $dompdf->setPaper("A4", "portrait");
     $dompdf->render();
-    $dompdf->stream($file));
+    $dompdf->stream($file);
   }
 ?>
