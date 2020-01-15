@@ -25,19 +25,6 @@
     {
       return date_format($datetime, "d/m/Y,H:i");
     }
-    public static function incrementDate($date)
-    {
-      $dateInc = Common::toDate(Common::toDateString($date));
-      $dateInc->modify("+1 day");
-      return $dateInc;
-    }
-    public static function decrementDate($date)
-    {
-      $dateDec = Common::toDate(Common::toDateString($date));
-      $dateDec->modify("-1 day");
-      return $dateDec;
-    }
-
     public static function randomString($length)
     {
       $characters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890`~!@#$%^&*()_+-=[]{}\|;:,<.>/?";
