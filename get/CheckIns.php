@@ -11,7 +11,7 @@
     echo($twig->load("action-result.json")->render(["result" => "error_incomplete_data"]));
     exit();
   }
-  $checkIns = $entityManager->getRepository("CheckIn")->orderBy(["CHECK_IN_DATE" => "ASC", "CHECK_IN_TIME" => "ASC", "CHECK_OUT_TIME" =>"ASC"]);
+  $checkIns = $entityManager->getRepository("CheckIn")->findBy([], ["CHECK_IN_DATE" => "ASC", "CHECK_IN_TIME" => "ASC", "CHECK_OUT_TIME" =>"ASC"]);
   $startDate = Common::toDate($_GET["start_date"]);
   $endDate = Common::toDate($_GET["end_date"]);
 	date_time_set($startDate, 0, 0);
