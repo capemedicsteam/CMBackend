@@ -22,6 +22,7 @@
   $type = $booking->getType();
   $confirmed = $booking->isConfirmed();
   $account = $booking->isAccount();
+  $filename = $filename = "";
   switch($type)
   {
 
@@ -46,6 +47,7 @@
               $details["ambulanceDepFacilityTime"] = Common::toTimeString($specificBooking->getGroundAmbulanceDepartureFacilityPickupTime());
               $details["ambulanceArrFacility"] = $specificBooking->getGroundAmbulanceArrivalFacility();
               $details["ambulanceArrFacilityTime"] = Common::toTimeString($specificBooking->getGroundAmbulanceArrivalAirportPickupTime());
+              $filename = "../files/booking_airside_transfer/".$_GET["id"].".booking";
               break;
     case "e": $specificBooking = $entityManager->find("BookingEvent", $_GET["id"]);
               $details["eventType"] = $specificBooking->getEventType();
@@ -68,6 +70,7 @@
               $details["venue"] = $specificBooking->getVenue();
               $details["attendeesType"] = $specificBooking->getAttendeesType();
               $details["eventDuration"] = $specificBooking->getExpectedEventDuration();
+              $filename = "../files/booking_event/".$_GET["id"].".booking";
               break;
     case "i": $specificBooking = $entityManager->find("BookingIFHT", $_GET["id"]);
               $details["longDistance"] = $specificBooking->isTravelMoreThan100km();
@@ -84,6 +87,7 @@
               $details["patIdPassport"] = $specificBooking->getPatientIdPassportNumber();
               $details["patCaseRef"] = $specificBooking->getPatientCaseReferenceNumber();
               $details["patNationality"] = $specificBooking->getPatientNationality();
+              $filename = "../files/booking_ifht/".$_GET["id"].".booking";
               break;
     case "o": $specificBooking = $entityManager->find("BookingOrganTransfer", $_GET["id"]);
               $details["service"] = $specificBooking->getService();
@@ -94,6 +98,7 @@
               $details["flightDate"] = Common::toDateString($specificBooking->getFlightDate());
               $details["flightDepTime"] = Common::toTimeString($specificBooking->getDepartureTime());
               $details["flightArrTime"] = Common::toTimeString($specificBooking->getArrivalTime());
+              $filename = "../files/booking_organ_transfer/".$_GET["id"].".booking";
               break;
     case "t": $specificBooking = $entityManager->find("BookingTV", $_GET["id"]);
               $details["type"] = $specificBooking->getType();
@@ -101,20 +106,17 @@
               $details["dateTime"] = Common::toDateTimeString($specificBooking->getDateTime());
               $details["location"] = $specificBooking->getLocation();
               $details["unitType"] = $specificBooking->getUnitType();
+              $filename = "../files/booking_tv/".$_GET["id"].".booking";
               break;
     default: $details = "";
   }
-  if(strpos("aeiot", $type) === false)
+  $additionalData = "";
+  if(file_exists($filename))
   {
-    $additionalData = "";
-  }
-  else
-  {
-    $additionalData = $specificBooking->getAdditionalData();
-    if($additionalData == "File not found")
-    {
-      $additionalData = "";
-    }
+    $handle = fopen($filename, "r");
+    $data = fread($handle, filesize($filename));
+    fclose($handle);
+    $additionalData = unserialize($data);
   }
   echo($twig->load("get-booking.json")->render(["id" => $_GET["id"], "custName" => $customer->getCustomerName(), "custSurname" => $customer->getCustomerSurname(), "custNumber" => $customer->getContactNumber(), "custEmail" => $customer->getEmail(), "custCompany" => $customer->getCompany(), "proposedDate" => $proposedDate, "type" => $type, "confirmed" => $confirmed, "account" => $account, "details" => $details, "additionalData" => $additionalData]));
 ?>

@@ -59,19 +59,6 @@ class BookingTV
       return $this->UNIT_TYPE;
     }
 
-    public function getAdditionalData()
-    {
-        $filename = "../../files/booking_tv/".$this->BOOKING_ID.".booking";
-        if(file_exists($filename))
-        {
-          $handle = fopen($filename, "r");
-          $data = fread($handle, filesize($filename));
-          fclose($handle);
-          return $data;
-        }
-        return "File not found";
-    }
-
     //Mutators
     public function setBookingId($id)
     {

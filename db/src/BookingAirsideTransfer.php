@@ -172,19 +172,6 @@ class BookingAirsideTransfer
         return $this->GROUND_AMBULANCE_ARRIVAL_AIRPORT_PICKUP_TIME;
     }
 
-    public function getAdditionalData()
-    {
-        $filename = "../../files/booking_airside_transfer/".$this->BOOKING_ID.".booking";
-        if(file_exists($filename))
-        {
-          $handle = fopen($filename, "r");
-          $data = fread($handle, filesize($filename));
-          fclose($handle);
-          return $data;
-        }
-        return "File not found";
-    }
-
     //Mutators
     public function setBookingId($id)
     {
